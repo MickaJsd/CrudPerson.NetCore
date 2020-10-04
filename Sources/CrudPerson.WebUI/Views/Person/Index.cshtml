@@ -1,0 +1,63 @@
+﻿@using CrudPerson.BusinessLibrary.ViewModels;
+@using CrudPerson.WebUI.Controllers;
+@model IEnumerable<IPersonViewModel>
+
+@{
+    const string PAGE_TITLE = "Index";
+    ViewData["Title"] = PAGE_TITLE;
+}
+
+<h1>@PAGE_TITLE</h1>
+
+<p>
+    <a asp-action="@nameof(PersonController.Create)">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@item.Identifier">Edit</a> |
+                    <a asp-action="@nameof(PersonController.Details)" asp-route-identifier="@item.Identifier">Details</a> |
+                    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@item.Identifier">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

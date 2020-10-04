@@ -1,0 +1,21 @@
+﻿@using CrudPerson.BusinessLibrary.ViewModels;
+@using CrudPerson.WebUI.Controllers;
+@model IPersonViewModel
+
+@{
+    const string PAGE_TITLE = "Create";
+    ViewData["Title"] = PAGE_TITLE;
+}
+
+<h1>@PAGE_TITLE</h1>
+
+<h4>Person</h4>
+<hr />
+@Html.EditorForModel(nameof(IPersonViewModel), new { SubmitAction = nameof(PersonController.Create), SubmitText = "Create" })
+<div>
+    <a asp-action="@nameof(PersonController.Index)">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

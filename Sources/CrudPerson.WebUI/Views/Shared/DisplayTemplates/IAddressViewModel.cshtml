@@ -1,0 +1,11 @@
+﻿@model CrudPerson.BusinessLibrary.ViewModels.IAddressViewModel
+
+<p class="personAddress">
+    @Html.DisplayNameFor(model => model.Street) : @Html.DisplayFor(model => model.Street)
+    @if (!string.IsNullOrWhiteSpace(Model.AdditionalAddress))
+    {
+        @: - @Html.DisplayFor(model => model.AdditionalAddress) -
+    }<br />
+    @Html.DisplayNameFor(model => model.City) (@Html.DisplayNameFor(model => model.ZipCode)) : @Html.DisplayFor(model => model.City) (@Html.DisplayFor(model => model.ZipCode))<br />
+    @Html.DisplayNameFor(model => model.Country) : @Html.DisplayFor(model => model.Country)<br />
+</p>

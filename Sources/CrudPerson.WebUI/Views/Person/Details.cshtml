@@ -1,0 +1,18 @@
+﻿@using CrudPerson.BusinessLibrary.ViewModels;
+@using CrudPerson.WebUI.Controllers;
+@model IPersonViewModel
+
+@{
+    const string PAGE_TITLE = "Details";
+    ViewData["Title"] = PAGE_TITLE;
+}
+
+<h1>@PAGE_TITLE</h1>
+
+@Html.DisplayForModel(nameof(IPersonViewModel))
+
+<div>
+    <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@Model.Identifier">Edit</a> |
+    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@Model.Identifier">Delete</a> |
+    <a asp-action="@nameof(PersonController.Index)">Back to List</a>
+</div>
