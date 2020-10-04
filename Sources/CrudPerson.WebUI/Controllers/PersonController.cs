@@ -22,7 +22,7 @@ namespace CrudPerson.WebUI.Controllers
         #region Private Methods
         private async Task<IActionResult> ViewPersonByIdentifierWithGuardsAsync(string viewName, Guid? identifier)
         {
-            if (identifier == null)
+            if (identifier == null || identifier == Guid.Empty)
             {
                 return this.NotFound();
             }
@@ -109,7 +109,7 @@ namespace CrudPerson.WebUI.Controllers
         [ActionName(nameof(Delete))]
         public async Task<IActionResult> DeleteConfirmed(Guid identifier)
         {
-            if (identifier == null)
+            if (identifier == Guid.Empty)
             {
                 return this.NotFound();
             }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace CrudPerson.BusinessLibrary.BusinessModel
 {
+    [DebuggerDisplay("{Identifier} - {Firstname} - {Lastname}", Name = "{Lastname}")]
     public class Person
     {
         public Guid Identifier { get; set; }

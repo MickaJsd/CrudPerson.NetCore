@@ -1,16 +1,16 @@
-﻿using CrudPerson.BusinessLibrary.BusinessModel;
-using CrudPerson.BusinessLibrary.Managers;
+﻿using CrudPerson.DataLibrary.DataModel;
+using CrudPerson.DataLibrary.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrudPerson.BusinessLibrary.Internal.Managers
+namespace CrudPerson.DataLibrary.Internal.Repositories
 {
-    internal class MockedPersonManager : IPersonManager
+    internal class MockedPersonRepository : IPersonRepository
     {
         #region Constructor
-        public MockedPersonManager()
+        public MockedPersonRepository()
         {
             this._mockedUpDataPerson = this._initialMockedUpDataPerson.ToDictionary(p => p.Identifier, p => p);
         }
@@ -88,6 +88,14 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         #endregion
 
         #region Private methods
+        private async Task<Person> FindWithGuardsAsync(Person Person)
+        {
+            if (Person == null)
+            {
+                return null;
+            }
+            return await this.FindWithGuardsAsync(Person.Identifier).ConfigureAwait(false);
+        }
 
         private Task<Person> FindWithGuardsAsync(Guid identifier)
         {
@@ -99,7 +107,7 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         }
         #endregion
 
-        #region IPersonManager implementation
+        #region IPersonRepository implementation
         /// <inheritdoc/>
         public Task<Person> CreateAsync(Person Person)
         {
@@ -109,9 +117,9 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         }
 
         /// <inheritdoc/>
-        public async Task<Person> DeteleAsync(Guid identifier)
+        public async Task<Person> DeteleAsync(Person Person)
         {
-            Person person = await this.FindWithGuardsAsync(identifier)
+            Person person = await this.FindWithGuardsAsync(Person)
                                         .ConfigureAwait(false);
             if (person != null)
             {
@@ -135,12 +143,8 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         /// <inheritdoc/>
         public async Task<Person> UpdateAsync(Person Person)
         {
-            if (Person == null)
-            {
-                return null;
-            }
-            Person person = await this.FindWithGuardsAsync(Person.Identifier).ConfigureAwait(false);
-
+            Person person = await this.FindWithGuardsAsync(Person)
+                                        .ConfigureAwait(false);
             if (person != null)
             {
                 this._mockedUpDataPerson[person.Identifier] = Person;

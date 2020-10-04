@@ -1,11 +1,11 @@
-﻿using CrudPerson.BusinessLibrary.BusinessModel;
+﻿using CrudPerson.DataLibrary.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CrudPerson.BusinessLibrary.Managers
+namespace CrudPerson.DataLibrary.Repositories
 {
-    public interface IPersonManager
+    public interface IPersonRepository
     {
         /// <summary>
         /// Lists all the existing persons
@@ -18,28 +18,27 @@ namespace CrudPerson.BusinessLibrary.Managers
         /// </summary>
         /// <param name="pesonIdentifier">The <see cref="Guid"/> identifier of the person to get</param>
         /// <returns>If the person has been found, the found <see cref="Person"/>; else <see cref="null"/></returns>
-        Task<Person> ReadAsync(Guid identifier);
+        Task<Person> ReadAsync(Guid pesonIdentifier);
 
         /// <summary>
         /// Updates the specified <see cref="Person"/> if it exists
         /// </summary>
-        /// <param name="person">The <see cref="Person"/> to update</param>
+        /// <param name="personViewModel">The <see cref="Person"/> to update</param>
         /// <returns>If the <see cref="Person"/> exists, the updated <see cref="Person"/>; else <see cref="null"/></returns>
-        Task<Person> UpdateAsync(Person person);
+        Task<Person> UpdateAsync(Person personEntity);
 
         /// <summary>
         /// Creates the specified <see cref="Person"/>
         /// </summary>
-        /// <param name="person">The <see cref="Person"/> to create</param>
+        /// <param name="personViewModel">The <see cref="Person"/> to create</param>
         /// <returns>The created <see cref="Person"/></returns>
-        Task<Person> CreateAsync(Person person);
+        Task<Person> CreateAsync(Person personEntity);
 
         /// <summary>
-        /// Deletes the <see cref="Person"/> identified by its <see cref="Guid"/> identifier
+        /// Deletes the specified <see cref="Person"/> if it exists
         /// </summary>
-        /// <param name="identifier">The <see cref="Guid"/> identifier of the person to delete</param>
+        /// <param name="person">The <see cref="Person"/> to delete</param>
         /// <returns>If the <see cref="Person"/> exists, the deleted <see cref="Person"/>; else <see cref="null"/></returns>
-        Task<Person> DeteleAsync(Guid identifier);
-
+        Task<Person> DeteleAsync(Person person);
     }
 }

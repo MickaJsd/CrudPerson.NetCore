@@ -1,4 +1,6 @@
-﻿using CrudPerson.BusinessLibrary.Internal.Managers;
+﻿using AutoMapper;
+using CrudPerson.BusinessLibrary.Internal.Configuration;
+using CrudPerson.BusinessLibrary.Internal.Managers;
 using CrudPerson.BusinessLibrary.Managers;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -12,11 +14,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The same <see cref="IServiceCollection"/> so that multiple calls can be chained</returns>
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
-            return services.AddScoped<IPersonManager, PersonManager>();
+            return services.AddScoped<IPersonManager, PersonManager>()
+                           .AddAutoMapper(typeof(MappingProfile));
         }
 
         /// <summary>
-        /// Add the mocked <see cref="IPersonManager"/> service to the specified <see cref="IServiceCollection"/> with a <see cref="ServiceLifetime.Scoped"/> lifetime.
+        /// Add the mocked <see cref="IPersonManager"/> service to the specified <see cref="IServiceCollection"/> with a <see cref="ServiceLifetime.Singleton"/> lifetime.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the <see cref="IPersonManager"/> service to.</param>
         /// <returns>The same <see cref="IServiceCollection"/> so that multiple calls can be chained</returns>

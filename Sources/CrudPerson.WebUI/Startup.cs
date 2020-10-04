@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,8 @@ namespace CrudPerson.WebUI
         public static void ConfigureServices(IServiceCollection services)
         {
             _ = services.AddControllersWithViews();
-            _ = services.AddMockedBusinessServices();
+            _ = services.AddBusinessServices()
+                .AddMockedRepositoryServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
