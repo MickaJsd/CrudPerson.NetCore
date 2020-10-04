@@ -1,9 +1,9 @@
-﻿using CrudPerson.BusinessLibrary.ViewModels;
+﻿using CrudPerson.BusinessLibrary.BusinessModel;
 using System;
 
 namespace CrudPerson.WebUI.Models
 {
-    public class PersonEditModel : IPersonViewModel
+    public class PersonEditModel : Person
     {
         public Guid Identifier { get; set; }
         public AddressEditModel Address { get; set; }
@@ -11,6 +11,6 @@ namespace CrudPerson.WebUI.Models
         public string Lastname { get; set; }
         public string Firstname { get; set; }
         public DateTime Birthdate { get; set; }
-        IAddressViewModel IPersonViewModel.Address { get => this.Address; set => this.Address = (AddressEditModel)value; }
+        Address Person.Address { get => this.Address; set => this.Address = (AddressEditModel)value; }
     }
 }

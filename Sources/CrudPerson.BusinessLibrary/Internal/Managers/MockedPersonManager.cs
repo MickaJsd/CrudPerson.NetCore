@@ -1,6 +1,5 @@
-﻿using CrudPerson.BusinessLibrary.Internal.ViewModels;
+﻿using CrudPerson.BusinessLibrary.BusinessModel;
 using CrudPerson.BusinessLibrary.Managers;
-using CrudPerson.BusinessLibrary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +18,12 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
 
         #region Privates properties
 
-        private readonly IPersonViewModel[] _initialMockedUpDataPerson = new IPersonViewModel[] {
-                new PersonViewModel
+        private readonly Person[] _initialMockedUpDataPerson = new Person[] {
+                new Person
                 {
                     Firstname = "Bruce",
                     Lastname = "Dickinson",
-                    Address = new AddressViewModel
+                    Address = new Address
                     {
                         Street = "Priorswell Rd",
                         AdditionalAddress ="second floor",
@@ -37,11 +36,11 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
                     Birthdate = new DateTime(1958, 8, 7),
                     Identifier = new Guid("87befc3e-dca1-4efd-b7d5-b91939beec4c")
                 },
-                new PersonViewModel
+                new Person
                 {
                     Firstname = "James",
                     Lastname = "Hetfield",
-                    Address = new AddressViewModel
+                    Address = new Address
                     {
                         Street = "9612 Ardine St",
                         City ="Downey",
@@ -53,11 +52,11 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
                     Birthdate = new DateTime(1963, 8, 3),
                     Identifier = new Guid("414b34a4-d5d3-4128-98ed-23c64ae900c5")
                 },
-                new PersonViewModel
+                new Person
                 {
                     Firstname = "Johannes",
                     Lastname = "Eckerström",
-                    Address = new AddressViewModel
+                    Address = new Address
                     {
                         Street = "Kyrkogatan 28",
                         City ="Göteborg",
@@ -69,10 +68,10 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
                     Birthdate = new DateTime(1986, 7, 2),
                     Identifier = new Guid("22c2d1a1-ac0d-4fe2-a2fc-f4c16381bee4")
                 },
-                new PersonViewModel {
+                new Person {
                     Firstname = "Tarja",
                     Lastname = "Turunen",
-                    Address = new AddressViewModel {
+                    Address = new Address {
                         Street = "Mäsäsläntie 2",
                         City = "Kitee",
                         ZipCode = "82430",
@@ -85,42 +84,42 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
                 }
             };
 
-        private Dictionary<Guid, IPersonViewModel> _mockedUpDataPerson { get; set; }
+        private Dictionary<Guid, Person> _mockedUpDataPerson { get; set; }
         #endregion
 
         #region Private methods
-        private async Task<IPersonViewModel> FindWithGuardsAsync(IPersonViewModel personViewModel)
+        private async Task<Person> FindWithGuardsAsync(Person Person)
         {
-            if (personViewModel == null)
+            if (Person == null)
             {
                 return null;
             }
-            return await this.FindWithGuardsAsync(personViewModel.Identifier).ConfigureAwait(false);
+            return await this.FindWithGuardsAsync(Person.Identifier).ConfigureAwait(false);
         }
 
-        private Task<IPersonViewModel> FindWithGuardsAsync(Guid identifier)
+        private Task<Person> FindWithGuardsAsync(Guid identifier)
         {
             if (this._mockedUpDataPerson.ContainsKey(identifier))
             {
                 return Task.FromResult(this._mockedUpDataPerson[identifier]);
             }
-            return Task.FromResult((IPersonViewModel)null);
+            return Task.FromResult((Person)null);
         }
         #endregion
 
         #region ICrudPerson implementation
         /// <inheritdoc/>
-        public Task<IPersonViewModel> CreateAsync(IPersonViewModel personViewModel)
+        public Task<Person> CreateAsync(Person Person)
         {
-            personViewModel.Identifier = Guid.NewGuid();
-            this._mockedUpDataPerson.Add(personViewModel.Identifier, personViewModel);
-            return Task.FromResult(personViewModel);
+            Person.Identifier = Guid.NewGuid();
+            this._mockedUpDataPerson.Add(Person.Identifier, Person);
+            return Task.FromResult(Person);
         }
 
         /// <inheritdoc/>
-        public async Task<IPersonViewModel> DeteleAsync(Guid identifier)
+        public async Task<Person> DeteleAsync(Guid identifier)
         {
-            IPersonViewModel person = await this.FindWithGuardsAsync(identifier)
+            Person person = await this.FindWithGuardsAsync(identifier)
                                         .ConfigureAwait(false);
             if (person != null)
             {
@@ -130,26 +129,26 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<IPersonViewModel>> ListAllAsync()
+        public Task<IEnumerable<Person>> ListAllAsync()
         {
-            return Task.FromResult((IEnumerable<IPersonViewModel>)this._mockedUpDataPerson.Values);
+            return Task.FromResult((IEnumerable<Person>)this._mockedUpDataPerson.Values);
         }
 
         /// <inheritdoc/>
-        public Task<IPersonViewModel> ReadAsync(Guid idPerson)
+        public Task<Person> ReadAsync(Guid idPerson)
         {
             return this.FindWithGuardsAsync(idPerson);
         }
 
         /// <inheritdoc/>
-        public async Task<IPersonViewModel> UpdateAsync(IPersonViewModel personViewModel)
+        public async Task<Person> UpdateAsync(Person Person)
         {
-            IPersonViewModel person = await this.FindWithGuardsAsync(personViewModel)
+            Person person = await this.FindWithGuardsAsync(Person)
                                         .ConfigureAwait(false);
             if (person != null)
             {
-                this._mockedUpDataPerson[person.Identifier] = personViewModel;
-                return personViewModel;
+                this._mockedUpDataPerson[person.Identifier] = Person;
+                return Person;
             }
             return person;
         }

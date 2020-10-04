@@ -1,5 +1,5 @@
-﻿using CrudPerson.BusinessLibrary.Managers;
-using CrudPerson.BusinessLibrary.ViewModels;
+﻿using CrudPerson.BusinessLibrary.BusinessModel;
+using CrudPerson.BusinessLibrary.Managers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,32 +10,32 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
     {
         #region ICrudPerson implementation
         /// <inheritdoc/>
-        public Task<IPersonViewModel> CreateAsync(IPersonViewModel personViewModel)
+        public Task<Person> CreateAsync(Person personViewModel)
         {
             throw new NotImplementedException();
         }
 
 
         /// <inheritdoc/>
-        public Task<IPersonViewModel> DeteleAsync(Guid identifier)
+        public Task<Person> DeteleAsync(Guid identifier)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<IPersonViewModel>> ListAllAsync()
+        public Task<IEnumerable<Person>> ListAllAsync()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public Task<IPersonViewModel> ReadAsync(Guid idPerson)
+        public Task<Person> ReadAsync(Guid idPerson)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public Task<IPersonViewModel> UpdateAsync(IPersonViewModel personViewModel)
+        public Task<Person> UpdateAsync(Person personViewModel)
         {
             throw new NotImplementedException();
         }

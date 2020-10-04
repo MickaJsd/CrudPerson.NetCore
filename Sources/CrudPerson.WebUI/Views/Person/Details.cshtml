@@ -1,6 +1,6 @@
-﻿@using CrudPerson.BusinessLibrary.ViewModels;
+﻿@using CrudPerson.BusinessLibrary.BusinessModel;
 @using CrudPerson.WebUI.Controllers;
-@model IPersonViewModel
+@model Person
 
 @{
     const string PAGE_TITLE = "Details";
@@ -9,7 +9,7 @@
 
 <h1>@PAGE_TITLE</h1>
 
-@Html.DisplayForModel(nameof(IPersonViewModel))
+@Html.DisplayForModel(nameof(Person))
 
 <div>
     <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@Model.Identifier">Edit</a> |

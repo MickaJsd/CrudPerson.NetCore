@@ -1,6 +1,5 @@
-﻿using CrudPerson.BusinessLibrary.Managers;
-using CrudPerson.BusinessLibrary.ViewModels;
-using CrudPerson.WebUI.Models;
+﻿using CrudPerson.BusinessLibrary.BusinessModel;
+using CrudPerson.BusinessLibrary.Managers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +16,7 @@ namespace CrudPerson.WebUI.Controllers
         #endregion
 
         #region Private properties
-        private IPersonManager _personManager { get; set; }
+        private IPersonManager _personManager { get; }
         #endregion
 
         #region Private Methods
@@ -28,7 +27,7 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            IPersonViewModel person = await this._personManager.ReadAsync(identifier.Value)
+            Person person = await this._personManager.ReadAsync(identifier.Value)
                                                .ConfigureAwait(false);
             if (person == null)
             {
@@ -37,15 +36,19 @@ namespace CrudPerson.WebUI.Controllers
             return this.View(viewName, person);
         }
 
-        private async Task<IActionResult> EditPersonWithGuardsAsync(IPersonViewModel personViewModel, Func<IPersonViewModel, Task<IPersonViewModel>> editionFunctionAsync, string viewName)
+        private async Task<IActionResult> EditPersonWithGuardsAsync(Person personModel, Func<Person, Task<Person>> editionFunctionAsync, string viewName)
         {
+            if (personModel == null)
+            {
+                return this.NotFound();
+            }
             if (this.ModelState.IsValid)
             {
-                IPersonViewModel editedPerson = await editionFunctionAsync(personViewModel)
+                Person editedPerson = await editionFunctionAsync(personModel)
                                                         .ConfigureAwait(false);
                 return this.RedirectToAction(nameof(Details), new { identifier = editedPerson.Identifier });
             }
-            return this.View(viewName, personViewModel);
+            return this.View(viewName, personModel);
 
         }
         #endregion
@@ -73,7 +76,7 @@ namespace CrudPerson.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PersonEditModel personViewModel)
+        public async Task<IActionResult> Create(Person personViewModel)
         {
             return await this.EditPersonWithGuardsAsync(personViewModel, this._personManager.CreateAsync, nameof(Edit))
                             .ConfigureAwait(false);
@@ -88,7 +91,7 @@ namespace CrudPerson.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(PersonEditModel personViewModel)
+        public async Task<IActionResult> Edit(Person personViewModel)
         {
             return await this.EditPersonWithGuardsAsync(personViewModel, this._personManager.UpdateAsync, nameof(Edit))
                             .ConfigureAwait(false);
@@ -111,7 +114,7 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            IPersonViewModel person = await this._personManager.DeteleAsync(identifier)
+            Person person = await this._personManager.DeteleAsync(identifier)
                                                .ConfigureAwait(false);
             if (person == null)
             {

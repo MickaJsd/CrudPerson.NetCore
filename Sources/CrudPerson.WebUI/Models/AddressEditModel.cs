@@ -1,8 +1,8 @@
-﻿using CrudPerson.BusinessLibrary.ViewModels;
+﻿using CrudPerson.BusinessLibrary.BusinessModel;
 
 namespace CrudPerson.WebUI.Models
 {
-    public class AddressEditModel : IAddressViewModel
+    public class AddressEditModel : Address
     {
         public string ZipCode { get; set; }
         public string Street { get; set; }

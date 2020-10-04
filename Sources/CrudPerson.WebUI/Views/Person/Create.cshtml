@@ -1,6 +1,6 @@
-﻿@using CrudPerson.BusinessLibrary.ViewModels;
+﻿@using CrudPerson.BusinessLibrary.BusinessModel;
 @using CrudPerson.WebUI.Controllers;
-@model IPersonViewModel
+@model Person
 
 @{
     const string PAGE_TITLE = "Create";
@@ -11,7 +11,7 @@
 
 <h4>Person</h4>
 <hr />
-@Html.EditorForModel(nameof(IPersonViewModel), new { SubmitAction = nameof(PersonController.Create), SubmitText = "Create" })
+@Html.EditorForModel(nameof(Person), new { SubmitAction = nameof(PersonController.Create), SubmitText = "Create" })
 <div>
     <a asp-action="@nameof(PersonController.Index)">Back to List</a>
 </div>
