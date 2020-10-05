@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace CrudPerson.DataLibrary.DataModel
@@ -6,6 +7,7 @@ namespace CrudPerson.DataLibrary.DataModel
     [DebuggerDisplay("{Identifier} - {Firstname} - {Lastname}", Name = "{Lastname}")]
     public class Person
     {
+        [Key]
         public Guid Identifier { get; set; }
 
         public Address Address { get; set; }

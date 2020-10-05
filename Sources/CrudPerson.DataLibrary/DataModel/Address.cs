@@ -1,7 +1,13 @@
-﻿namespace CrudPerson.DataLibrary.DataModel
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace CrudPerson.DataLibrary.DataModel
 {
     public class Address
     {
+        [Key]
+        public Guid Identifier { get; set; }
+
         public string ZipCode { get; set; }
 
         public string Street { get; set; }
