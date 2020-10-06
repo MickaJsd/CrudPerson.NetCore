@@ -1,6 +1,6 @@
-﻿@using CrudPerson.BusinessLibrary.BusinessModel;
+﻿@using CrudPerson.WebUI.Models.ViewModels;
 @using CrudPerson.WebUI.Controllers;
-@model Person
+@model PersonViewModel
 
 @{
     const string PAGE_TITLE = "Delete";
@@ -10,7 +10,7 @@
 <h1>@PAGE_TITLE</h1>
 
 <h3>Are you sure you want to delete this?</h3>
-@Html.DisplayForModel(nameof(Person))
+@Html.DisplayForModel(nameof(PersonViewModel))
 <div>
     <form asp-action="@nameof(PersonController.Delete)">
         <input type="hidden" asp-for="Identifier" />
