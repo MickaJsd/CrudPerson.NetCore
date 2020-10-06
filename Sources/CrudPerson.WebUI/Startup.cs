@@ -20,8 +20,9 @@ namespace CrudPerson.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             _ = services.AddControllersWithViews();
-            _ = services.AddBusinessServices()
-                .AddRepositoryServices(this.Configuration);
+            _ = services.AddWebServices()
+                        .AddBusinessServices()
+                        .AddRepositoryServices(this.Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

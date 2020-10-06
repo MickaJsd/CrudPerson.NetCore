@@ -1,5 +1,5 @@
-﻿using CrudPerson.BusinessLibrary.BusinessModel;
-using CrudPerson.BusinessLibrary.Managers;
+﻿using CrudPerson.WebUI.Models.ViewModels;
+using CrudPerson.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -9,14 +9,14 @@ namespace CrudPerson.WebUI.Controllers
     public class PersonController : Controller
     {
         #region Constructor
-        public PersonController(IPersonManager personManager)
+        public PersonController(IPersonModel personModel)
         {
-            this._personManager = personManager;
+            this._personModel = personModel;
         }
         #endregion
 
         #region Private properties
-        private IPersonManager _personManager { get; }
+        private IPersonModel _personModel { get; }
         #endregion
 
         #region Private Methods
@@ -27,7 +27,7 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            Person person = await this._personManager.ReadAsync(identifier.Value)
+            PersonViewModel person = await this._personModel.ReadAsync(identifier.Value)
                                                .ConfigureAwait(false);
             if (person == null)
             {
@@ -36,7 +36,7 @@ namespace CrudPerson.WebUI.Controllers
             return this.View(viewName, person);
         }
 
-        private async Task<IActionResult> EditPersonWithGuardsAsync(Person personModel, Func<Person, Task<Person>> editionFunctionAsync, string viewName)
+        private async Task<IActionResult> EditPersonWithGuardsAsync(PersonViewModel personModel, Func<PersonViewModel, Task<PersonViewModel>> editionFunctionAsync, string viewName)
         {
             if (personModel == null)
             {
@@ -44,7 +44,7 @@ namespace CrudPerson.WebUI.Controllers
             }
             if (this.ModelState.IsValid)
             {
-                Person editedPerson = await editionFunctionAsync(personModel)
+                PersonViewModel editedPerson = await editionFunctionAsync(personModel)
                                                         .ConfigureAwait(false);
                 return this.RedirectToAction(nameof(Details), new { identifier = editedPerson.Identifier });
             }
@@ -57,7 +57,7 @@ namespace CrudPerson.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return this.View(await this._personManager.ListAllMinimalAsync()
+            return this.View(await this._personModel.ListAllMinimalAsync()
                         .ConfigureAwait(false));
         }
 
@@ -76,9 +76,9 @@ namespace CrudPerson.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Person personViewModel)
+        public async Task<IActionResult> Create(PersonViewModel personViewModel)
         {
-            return await this.EditPersonWithGuardsAsync(personViewModel, this._personManager.CreateAsync, nameof(Edit))
+            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.CreateAsync, nameof(Edit))
                             .ConfigureAwait(false);
         }
 
@@ -91,9 +91,9 @@ namespace CrudPerson.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Person personViewModel)
+        public async Task<IActionResult> Edit(PersonViewModel personViewModel)
         {
-            return await this.EditPersonWithGuardsAsync(personViewModel, this._personManager.UpdateAsync, nameof(Edit))
+            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.UpdateAsync, nameof(Edit))
                             .ConfigureAwait(false);
         }
 
@@ -114,7 +114,7 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            Person person = await this._personManager.DeteleAsync(identifier)
+            PersonViewModel person = await this._personModel.DeteleAsync(identifier)
                                                .ConfigureAwait(false);
             if (person == null)
             {

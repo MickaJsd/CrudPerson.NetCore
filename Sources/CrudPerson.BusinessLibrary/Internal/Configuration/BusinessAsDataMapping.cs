@@ -6,13 +6,13 @@ using DataAddress = CrudPerson.DataLibrary.DataModel.Address;
 
 namespace CrudPerson.BusinessLibrary.Internal.Configuration
 {
-    internal class MappingProfile : Profile
+    internal class BusinessAsDataMapping : Profile
     {
-        public MappingProfile()
+        public BusinessAsDataMapping()
         {
             _ = this.CreateMap<BusinessPerson, DataPerson>().ForMember(src => src.Identifier, trgt => trgt.Ignore());
             _ = this.CreateMap<DataPerson, BusinessPerson>();
-            _ = this.CreateMap<BusinessAddress, DataAddress>();
+            _ = this.CreateMap<BusinessAddress, DataAddress>().ForMember(src => src.Identifier, trgt => trgt.Ignore());
             _ = this.CreateMap<DataAddress, BusinessAddress>();
         }
     }

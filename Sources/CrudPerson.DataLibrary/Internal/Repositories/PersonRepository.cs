@@ -25,8 +25,8 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
         #endregion
 
         #region Private properties
-        private IQueryable<Person> PersonWithAddress => this._databaseContext.Set<Person>().Include(p => p.Address);
-        private IQueryable<Person> PersonMinimal => this._databaseContext.Set<Person>(); 
+        private IQueryable<Person> _personWithAddress => this._databaseContext.Set<Person>().Include(p => p.Address);
+        private IQueryable<Person> _personMinimal => this._databaseContext.Set<Person>(); 
         #endregion
 
         #region IPersonRepository implementation
@@ -37,7 +37,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
                 throw new ArgumentNullOrEmptyException(nameof(person), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonData);
             }
 
-            Person alreadyExistingPerson = await this.PersonWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
+            Person alreadyExistingPerson = await this._personWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
                                             .ConfigureAwait(false);
 
             if (alreadyExistingPerson != null)
@@ -63,7 +63,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
                 throw new ArgumentNullOrEmptyException(nameof(person), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonData);
             }
 
-            Person alreadyExistingPerson = await this.PersonWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
+            Person alreadyExistingPerson = await this._personWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
                                             .ConfigureAwait(false);
 
             if (alreadyExistingPerson == null)
@@ -84,7 +84,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
 
         public async Task<IEnumerable<Person>> ListAllMinimalAsync()
         {
-            return await this.PersonMinimal.ToListAsync()
+            return await this._personMinimal.ToListAsync()
                        .ConfigureAwait(false);
         }
 
@@ -94,7 +94,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
             {
                 throw new ArgumentNullOrEmptyException(nameof(identifier), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonIdentifier);
             }
-            return await this.PersonWithAddress.SingleOrDefaultAsync(p => p.Identifier == identifier)
+            return await this._personWithAddress.SingleOrDefaultAsync(p => p.Identifier == identifier)
                         .ConfigureAwait(false);
         }
 
@@ -105,7 +105,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
                 throw new ArgumentNullOrEmptyException(nameof(person), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonData);
             }
 
-            Person alreadyExistingPerson = await this.PersonWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
+            Person alreadyExistingPerson = await this._personWithAddress.SingleOrDefaultAsync(p => p.Identifier == person.Identifier)
                                             .ConfigureAwait(false);
 
             if (alreadyExistingPerson == null)
