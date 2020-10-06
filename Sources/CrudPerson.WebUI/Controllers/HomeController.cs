@@ -16,6 +16,7 @@ namespace CrudPerson.WebUI.Controllers
 
         public IActionResult Index()
         {
+            this._logger.LogInformation($"Enter Action {nameof(HomeController)}.{nameof(Index)}");
             return this.View();
         }
 

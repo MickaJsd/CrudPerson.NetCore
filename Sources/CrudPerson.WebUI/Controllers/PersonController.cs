@@ -1,6 +1,7 @@
-﻿using CrudPerson.WebUI.Models.ViewModels;
-using CrudPerson.WebUI.Models;
+﻿using CrudPerson.WebUI.Models;
+using CrudPerson.WebUI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Threading.Tasks;
 
@@ -9,14 +10,16 @@ namespace CrudPerson.WebUI.Controllers
     public class PersonController : Controller
     {
         #region Constructor
-        public PersonController(IPersonModel personModel)
+        public PersonController(IPersonModel personModel, IStringLocalizer<PersonController> localizer)
         {
             this._personModel = personModel;
+            this._localizer = localizer;
         }
         #endregion
 
         #region Private properties
         private IPersonModel _personModel { get; }
+        private IStringLocalizer<PersonController> _localizer { get; }
         #endregion
 
         #region Private Methods
