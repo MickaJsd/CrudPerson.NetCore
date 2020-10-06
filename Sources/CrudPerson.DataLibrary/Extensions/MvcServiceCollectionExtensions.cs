@@ -1,10 +1,10 @@
-﻿using CrudPerson.DataLibrary.Internal.Data;
+﻿using CrudPerson.DataLibrary.Data;
+using CrudPerson.DataLibrary.Internal.Data;
 using CrudPerson.DataLibrary.Internal.Repositories;
 using CrudPerson.DataLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Diagnostics.Contracts;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -69,6 +69,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             return services.AddScoped<IPersonRepository, PersonRepository>()
+                           .AddScoped<IDatabaseContext, DatabaseContext>()
                            .AddDbContext(configuration);
 
         }

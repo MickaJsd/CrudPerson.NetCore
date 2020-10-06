@@ -10,8 +10,8 @@ namespace CrudPerson.BusinessLibrary.Managers
         /// <summary>
         /// Lists all the existing persons
         /// </summary>
-        /// <returns>The <see cref="IEnumerable<Person>"/> that represents all the existing persons</returns>
-        Task<IEnumerable<Person>> ListAllAsync();
+        /// <returns>The <see cref="IEnumerable<Person>"/> that represents all the existing persons with fewest informations</returns>
+        Task<IEnumerable<Person>> ListAllMinimalAsync();
 
         /// <summary>
         /// Gets the <see cref="Person"/> by its identifier

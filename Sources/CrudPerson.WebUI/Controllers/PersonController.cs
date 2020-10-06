@@ -57,7 +57,7 @@ namespace CrudPerson.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return this.View(await this._personManager.ListAllAsync()
+            return this.View(await this._personManager.ListAllMinimalAsync()
                         .ConfigureAwait(false));
         }
 

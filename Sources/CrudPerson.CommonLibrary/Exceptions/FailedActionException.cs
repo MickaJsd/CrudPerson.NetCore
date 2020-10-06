@@ -1,18 +1,12 @@
-﻿using System;
+﻿using CrudPerson.CommonLibrary.Resources;
+using System;
 using System.Runtime.Serialization;
 
-namespace CrudPerson.BusinessLibrary.Exceptions
+namespace CrudPerson.CommonLibrary.Exceptions
 {
     [Serializable]
     public class FailedActionException : Exception
     {
-
-        #region Constants
-
-        const string MESSAGE_FORMAT_ACTION_MESSAGE = "Failed action : {0} - {1}";
-        const string MESSAGE_FORMAT_ACTION_MESSAGE_CONTEXT_DATA = "Failed action : {0} - {1} - Context data : {2}";
-
-        #endregion
         #region Constructors
         public FailedActionException()
         {
@@ -51,11 +45,11 @@ namespace CrudPerson.BusinessLibrary.Exceptions
         #region Private Static Methods
         private static string GetMessage(string actionName, string message)
         {
-            return string.Format(MESSAGE_FORMAT_ACTION_MESSAGE, actionName, message);
+            return string.Format(ExceptionResources.FailedActionException_FailedActionMessageFormat, actionName, message);
         }
         private static string GetMessage(string actionName, string contextData, string message)
         {
-            return string.Format(MESSAGE_FORMAT_ACTION_MESSAGE_CONTEXT_DATA, actionName, message, contextData);
+            return string.Format(ExceptionResources.FailedActionException_FailedActionWithContentDataMessageFormat, actionName, message, contextData);
         }
         #endregion
     }

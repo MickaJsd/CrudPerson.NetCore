@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using CrudPerson.BusinessLibrary.Exceptions;
 using CrudPerson.BusinessLibrary.Managers;
+using CrudPerson.CommonLibrary.Exceptions;
+using CrudPerson.CommonLibrary.Resources;
 using CrudPerson.DataLibrary.DataModel;
 using CrudPerson.DataLibrary.Repositories;
 using System;
@@ -14,12 +15,6 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
 {
     internal class PersonManager : IPersonManager
     {
-        #region Private Constants
-        const string EDIT_EXCEPTION_NULL_PERSON = "The person data is required for editing";
-        const string EDIT_FAILED_ACTION_NAME = "Edit";
-        const string EDIT_FAILED_ACTION_MESSAGE = "Edit of the person failed";
-        #endregion
-
         #region Constructor
         public PersonManager(IPersonRepository personRepository, IMapper mapper)
         {
@@ -54,16 +49,17 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         {
             if (person == null)
             {
-                throw new ArgumentNullOrEmptyException(nameof(person), EDIT_EXCEPTION_NULL_PERSON);
+                throw new ArgumentNullOrEmptyException(nameof(person), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonData);
             }
 
             DataPerson newPerson = person.ToData(this._mapper);
             newPerson.Identifier = Guid.NewGuid();
-            DataPerson editedDataPerson = await this._personRepository.CreateAsync(newPerson).ConfigureAwait(false);
+            DataPerson editedDataPerson = await this._personRepository.CreateAsync(newPerson)
+                                            .ConfigureAwait(false);
 
             if (editedDataPerson == null)
             {
-                throw new FailedActionException(EDIT_FAILED_ACTION_NAME, EDIT_FAILED_ACTION_MESSAGE);
+                throw new FailedActionException(ExceptionResources.FailedActionException_EditActionName, ExceptionResources.FailedActionException_EditPersonExceptionMessage);
             }
 
             return editedDataPerson.ToBusiness(this._mapper);
@@ -89,9 +85,9 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<BusinessPerson>> ListAllAsync()
+        public async Task<IEnumerable<BusinessPerson>> ListAllMinimalAsync()
         {
-            IEnumerable<DataPerson> allPersons = await this._personRepository.ListAllAsync().ConfigureAwait(false);
+            IEnumerable<DataPerson> allPersons = await this._personRepository.ListAllMinimalAsync().ConfigureAwait(false);
 
             return allPersons.Select(p => p.ToBusiness(this._mapper));
         }
@@ -114,7 +110,7 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         {
             if (person == null)
             {
-                throw new ArgumentNullOrEmptyException(nameof(person), EDIT_EXCEPTION_NULL_PERSON);
+                throw new ArgumentNullOrEmptyException(nameof(person), ExceptionResources.ArgumentNullOrEmptyException_RequiredPersonData);
             }
             DataPerson foundPerson = await this.FindWithGuardsAsync(person.Identifier).ConfigureAwait(false);
             if (foundPerson == null)
@@ -127,7 +123,7 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
 
             if (updatedDataPerson == null)
             {
-                throw new FailedActionException(EDIT_FAILED_ACTION_NAME, EDIT_FAILED_ACTION_MESSAGE);
+                throw new FailedActionException(ExceptionResources.FailedActionException_EditActionName, ExceptionResources.FailedActionException_EditPersonExceptionMessage);
             }
 
             return updatedDataPerson.ToBusiness(this._mapper);
