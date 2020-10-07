@@ -3,16 +3,17 @@
 @model PersonViewModel
 
 @{
-    const string PAGE_TITLE = "Details";
-    ViewData["Title"] = PAGE_TITLE;
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
-<h1>@PAGE_TITLE</h1>
+<h1>@Localizer["PageTitle"]</h1>
 
+<h4>@SharedLocalizer["PersonEntityName"]</h4>
+<hr />
 @Html.DisplayForModel(nameof(PersonViewModel))
 
 <div>
-    <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@Model.Identifier">Edit</a> |
-    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@Model.Identifier">Delete</a> |
-    <a asp-action="@nameof(PersonController.Index)">Back to List</a>
+    <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@Model.Identifier">@SharedLocalizer["EditAction"]</a> |
+    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@Model.Identifier">@SharedLocalizer["DeleteAction"]</a> |
+    <a asp-action="@nameof(PersonController.Index)">@SharedLocalizer["BackToListAction"]</a>
 </div>

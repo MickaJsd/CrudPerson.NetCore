@@ -1,20 +1,17 @@
-﻿@using CrudPerson.WebUI.Models.ViewModels;
-@using CrudPerson.WebUI.Controllers;
-@model PersonViewModel
+﻿@model PersonViewModel
 
 @{
-    const string PAGE_TITLE = "Delete";
-    ViewData["Title"] = PAGE_TITLE;
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
-<h1>@PAGE_TITLE</h1>
+<h1>@Localizer["PageTitle"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Localizer["ConfirmWarning"]</h3>
 @Html.DisplayForModel(nameof(PersonViewModel))
 <div>
     <form asp-action="@nameof(PersonController.Delete)">
         <input type="hidden" asp-for="Identifier" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="@nameof(PersonController.Index)">Back to List</a>
+        <input type="submit" value="@SharedLocalizer["DeleteAction"]" class="btn btn-danger" /> |
+        <a asp-action="@nameof(PersonController.Index)">@SharedLocalizer["BackToListAction"]</a>
     </form>
 </div>

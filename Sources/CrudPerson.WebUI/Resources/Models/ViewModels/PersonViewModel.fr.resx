@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateNew" xml:space="preserve">
-    <value>Create new</value>
+  <data name="Birthdate" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Adresse e-mail</value>
+  </data>
+  <data name="Firstname" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Adresse e-mail invalide</value>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="MailingAddress" xml:space="preserve">
+    <value>Adresse postale</value>
+  </data>
+  <data name="RequiredBirthdate" xml:space="preserve">
+    <value>La date de naissance est requise</value>
+  </data>
+  <data name="RequiredEmailAddress" xml:space="preserve">
+    <value>L'adresse e-mail est requise</value>
+  </data>
+  <data name="RequiredFirstname" xml:space="preserve">
+    <value>Le prénom est requis</value>
+  </data>
+  <data name="RequiredLastname" xml:space="preserve">
+    <value>Le nom est requis</value>
+  </data>
+  <data name="RequiredMailingAddress" xml:space="preserve">
+    <value>L'adresse postale est requise</value>
   </data>
 </root>

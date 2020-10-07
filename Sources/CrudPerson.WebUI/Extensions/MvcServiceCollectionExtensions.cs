@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using CrudPerson.CommonLibrary.Exceptions;
-using CrudPerson.CommonLibrary.Resources;
 using CrudPerson.WebUI.Internal.Configuration;
 using CrudPerson.WebUI.Internal.Models;
 using CrudPerson.WebUI.Models;
@@ -49,12 +47,12 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddWebUiServices(this IServiceCollection services, string[] supportedCultures)
         {
             _ = services.AddControllersWithViews();
-            _ = services.AddMvc()
+            _ = services.AddLocalization(options => options.ResourcesPath = RESOURCE_PATH)
+                        .AddMvc()
                         .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                         .AddDataAnnotationsLocalization();
             return services.AddScoped<IPersonModel, PersonModel>()
                            .AddAutoMapper(typeof(ViewModelAsBusinessMapping))
-                           .AddLocalization(options => options.ResourcesPath = RESOURCE_PATH)
                            .ConfigureWebUiServices(supportedCultures);
         }
     }

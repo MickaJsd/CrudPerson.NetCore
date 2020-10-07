@@ -117,7 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>C.L.M.S Personne</value>
+  </data>
+  <data name="BackToListAction" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="CreateAction" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="DeleteAction" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DetailsAction" xml:space="preserve">
+    <value>Détails</value>
+  </data>
   <data name="EditAction" xml:space="preserve">
-    <value>Modifier...</value>
+    <value>Modifier</value>
+  </data>
+  <data name="HomeLinkLabel" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="PersonEntityName" xml:space="preserve">
+    <value>Personne</value>
+  </data>
+  <data name="PersonLinkLabel" xml:space="preserve">
+    <value>Personnes</value>
+  </data>
+  <data name="TitleAppName" xml:space="preserve">
+    <value>Créer, Lire, Modifier et Supprimer des Personnes</value>
   </data>
 </root>

@@ -117,34 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppName" xml:space="preserve">
-    <value>C.R.U.D Person</value>
+  <data name="Additional" xml:space="preserve">
+    <value>Rue 2</value>
   </data>
-  <data name="BackToListAction" xml:space="preserve">
-    <value>Back to list</value>
+  <data name="AdditionalDetail" xml:space="preserve">
+    <value>(optionnel) informations additionnelles</value>
   </data>
-  <data name="CreateAction" xml:space="preserve">
-    <value>Create</value>
+  <data name="City" xml:space="preserve">
+    <value>Ville</value>
   </data>
-  <data name="DeleteAction" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Country" xml:space="preserve">
+    <value>Pays</value>
   </data>
-  <data name="DetailsAction" xml:space="preserve">
-    <value>Details</value>
+  <data name="RequiredCity" xml:space="preserve">
+    <value>La ville est requise</value>
   </data>
-  <data name="EditAction" xml:space="preserve">
-    <value>Edit</value>
+  <data name="RequiredCountry" xml:space="preserve">
+    <value>Le pays est requis</value>
   </data>
-  <data name="HomeLinkLabel" xml:space="preserve">
-    <value>Home</value>
+  <data name="RequiredStreet" xml:space="preserve">
+    <value>La rue est requise</value>
   </data>
-  <data name="PersonEntityName" xml:space="preserve">
-    <value>Person</value>
+  <data name="RequiredZipCode" xml:space="preserve">
+    <value>Le code postal est requis</value>
   </data>
-  <data name="PersonLinkLabel" xml:space="preserve">
-    <value>Persons</value>
+  <data name="Street" xml:space="preserve">
+    <value>Rue</value>
   </data>
-  <data name="TitleAppName" xml:space="preserve">
-    <value>Create, Read, Update and Delete Persons</value>
+  <data name="StreetDetail" xml:space="preserve">
+    <value>Rue et numéro</value>
+  </data>
+  <data name="ZipCode" xml:space="preserve">
+    <value>Code postal</value>
   </data>
 </root>

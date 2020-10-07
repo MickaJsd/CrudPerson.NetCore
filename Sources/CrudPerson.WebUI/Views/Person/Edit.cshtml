@@ -1,20 +1,16 @@
-﻿@using CrudPerson.WebUI.Models.ViewModels;
-@using CrudPerson.WebUI.Controllers;
-@model PersonViewModel
+﻿@model PersonViewModel
 
 @{
-    const string PAGE_TITLE = "Edit";
-    ViewData["Title"] = PAGE_TITLE;
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
-<h1>@PAGE_TITLE</h1>
+<h1>@Localizer["PageTitle"]</h1>
 
-<h4>Person</h4>
+<h4>@SharedLocalizer["PersonEntityName"]</h4>
 <hr />
-@Html.EditorForModel(nameof(PersonViewModel), new { SubmitAction = nameof(PersonController.Edit), SubmitText = "Edit" })
-
+@Html.EditorForModel(nameof(PersonViewModel), new { SubmitAction = nameof(PersonController.Edit), SubmitText = SharedLocalizer["EditAction"] })
 <div>
-    <a asp-action="@nameof(PersonController.Index)">Back to List</a>
+    <a asp-action="@nameof(PersonController.Index)">@SharedLocalizer["BackToListAction"]</a>
 </div>
 
 @section Scripts {

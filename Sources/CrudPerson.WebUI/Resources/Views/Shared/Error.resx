@@ -117,34 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppName" xml:space="preserve">
-    <value>C.R.U.D Person</value>
+  <data name="GenericRequestErrorMessage" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
   </data>
-  <data name="BackToListAction" xml:space="preserve">
-    <value>Back to list</value>
+  <data name="HTML_SwapToDevelopmentForMoreDetails" xml:space="preserve">
+    <value>Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred.</value>
   </data>
-  <data name="CreateAction" xml:space="preserve">
-    <value>Create</value>
+  <data name="HTML_SwapToDevelopmentForMoreDetailsDescription" xml:space="preserve">
+    <value>&lt;strong&gt;The Development environment shouldn't be enabled for deployed applications.&lt;/strong&gt;
+    It can result in displaying sensitive information from exceptions to end users.
+    For local debugging, enable the &lt;strong&gt;Development&lt;/strong&gt; environment by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;
+    and restarting the app.</value>
   </data>
-  <data name="DeleteAction" xml:space="preserve">
-    <value>Delete</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
-  <data name="DetailsAction" xml:space="preserve">
-    <value>Details</value>
+  <data name="RequestId" xml:space="preserve">
+    <value>Request ID</value>
   </data>
-  <data name="EditAction" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="HomeLinkLabel" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="PersonEntityName" xml:space="preserve">
-    <value>Person</value>
-  </data>
-  <data name="PersonLinkLabel" xml:space="preserve">
-    <value>Persons</value>
-  </data>
-  <data name="TitleAppName" xml:space="preserve">
-    <value>Create, Read, Update and Delete Persons</value>
+  <data name="TitleDevelopmentMode" xml:space="preserve">
+    <value>Development Mode</value>
   </data>
 </root>

@@ -61,11 +61,92 @@ namespace CrudPerson.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C.R.U.D Person.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to list.
+        /// </summary>
+        public static string BackToListAction {
+            get {
+                return ResourceManager.GetString("BackToListAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string CreateAction {
+            get {
+                return ResourceManager.GetString("CreateAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteAction {
+            get {
+                return ResourceManager.GetString("DeleteAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string DetailsAction {
+            get {
+                return ResourceManager.GetString("DetailsAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string EditAction {
             get {
                 return ResourceManager.GetString("EditAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string HomeLinkLabel {
+            get {
+                return ResourceManager.GetString("HomeLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Person.
+        /// </summary>
+        public static string PersonEntityName {
+            get {
+                return ResourceManager.GetString("PersonEntityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persons.
+        /// </summary>
+        public static string PersonLinkLabel {
+            get {
+                return ResourceManager.GetString("PersonLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create, Read, Update and Delete Persons.
+        /// </summary>
+        public static string TitleAppName {
+            get {
+                return ResourceManager.GetString("TitleAppName", resourceCulture);
             }
         }
     }

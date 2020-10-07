@@ -6,6 +6,7 @@ using CrudPerson.DataLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,12 +22,12 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
         #endregion
 
         #region Private Properties
-        private IDatabaseContext _databaseContext { get; }
+        private IDatabaseContext _databaseContext { get; }       
         #endregion
 
         #region Private properties
         private IQueryable<Person> _personWithAddress => this._databaseContext.Set<Person>().Include(p => p.Address);
-        private IQueryable<Person> _personMinimal => this._databaseContext.Set<Person>(); 
+        private IQueryable<Person> _personMinimal => this._databaseContext.Set<Person>();
         #endregion
 
         #region IPersonRepository implementation
@@ -45,7 +46,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
                 throw new FailedActionException(ExceptionResources.FailedActionException_CreateActionName, ExceptionResources.FailedActionException_AlreadyExistingPerson, person.Identifier.ToString());
             }
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Person> personTracker = this._databaseContext.Person.Add(person);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Person> personTracker = this._databaseContext.Person.Add(person.EnsureUtcDates());
 
             int numberOfCreatedRows = await this._databaseContext.SaveChangesAsync()
                                         .ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
                 throw new FailedActionException(ExceptionResources.FailedActionException_EditActionName, ExceptionResources.FailedActionException_UnexistingPerson, person.Identifier.ToString());
             }
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Person> personTracker = this._databaseContext.Person.Update(person);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Person> personTracker = this._databaseContext.Person.Update(person.EnsureUtcDates());
 
             int numberOfCreatedRows = await this._databaseContext.SaveChangesAsync()
                                         .ConfigureAwait(false);

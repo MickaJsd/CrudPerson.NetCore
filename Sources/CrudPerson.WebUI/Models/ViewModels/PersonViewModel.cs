@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
@@ -9,26 +10,25 @@ namespace CrudPerson.WebUI.Models.ViewModels
     {
         public Guid Identifier { get; set; }
 
-        [Display(Name = "Mailing address", Prompt = "Mailing address")]
-        [Required(ErrorMessage = "The mailing adress is required")]
+        [Display(Name = "MailingAddress", Prompt = "MailingAddress")]
+        [Required(ErrorMessage = "RequiredMailingAddress")]
         public AddressViewModel Address { get; set; }
 
-        [Display(Name = "Email address", Prompt = "Email address")]
-        [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Display(Name = "EmailAddress", Prompt = "EmailAddress")]
+        [Required(ErrorMessage = "RequiredEmailAddress")]
+        [EmailAddress(ErrorMessage = "InvalidEmailAddress")]
         public string Email { get; set; }
 
         [Display(Name = "Lastname", Prompt = "Lastname")]
-        [Required(ErrorMessage = "The lastname is required")]
+        [Required(ErrorMessage = "RequiredLastname")]
         public string Lastname { get; set; }
 
         [Display(Name = "Firstname", Prompt = "Firstname")]
-        [Required(ErrorMessage = "The firstname is required")]
+        [Required(ErrorMessage = "RequiredFirstname")]
         public string Firstname { get; set; }
 
-        [Display(Name = "Date of birth", Prompt = "Date of birth")]
-        [Required(ErrorMessage = "The date of birth is required")]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [Display(Name = "Birthdate", Prompt = "Birthdate")]
+        [Required(ErrorMessage = "RequiredBirthdate")]
         [DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
     }

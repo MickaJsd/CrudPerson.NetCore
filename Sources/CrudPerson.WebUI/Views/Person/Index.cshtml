@@ -1,19 +1,11 @@
-﻿@using CrudPerson.WebUI.Models.ViewModels;
-@using CrudPerson.WebUI.Controllers;
-@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-
-@inject IViewLocalizer Localizer
-@inject IStringLocalizer<SharedResources> SharedLocalizer
-
+﻿
 @model IEnumerable<PersonViewModel>
 
 @{
-    const string PAGE_TITLE = "Index";
-    ViewData["Title"] = PAGE_TITLE;
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
-<h1>@PAGE_TITLE</h1>
+<h1>@Localizer["PageTitle"]</h1>
 
 <p>
     <a asp-action="@nameof(PersonController.Create)">@Localizer["CreateNew"]</a>
@@ -57,8 +49,8 @@
                 </td>
                 <td>
                     <a asp-action="@nameof(PersonController.Edit)" asp-route-identifier="@item.Identifier">@SharedLocalizer["EditAction"]</a> |
-                    <a asp-action="@nameof(PersonController.Details)" asp-route-identifier="@item.Identifier">Details</a> |
-                    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@item.Identifier">Delete</a>
+                    <a asp-action="@nameof(PersonController.Details)" asp-route-identifier="@item.Identifier">@SharedLocalizer["DetailsAction"]</a> |
+                    <a asp-action="@nameof(PersonController.Delete)" asp-route-identifier="@item.Identifier">@SharedLocalizer["DeleteAction"]</a>
                 </td>
             </tr>
         }
