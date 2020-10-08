@@ -1,3 +1,5 @@
+using CrudPerson.WebUI.Controllers;
+using CrudPerson.WebUI.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +15,7 @@ namespace CrudPerson.WebUI
         #region private properties
         const string CULTURE_FR = "fr";
         internal const string CULTURE_EN = "en";
-        private static readonly string[] _supportedCultures = new string[] { CULTURE_EN, CULTURE_FR};
+        private static readonly string[] _supportedCultures = new string[] { CULTURE_EN, CULTURE_FR };
         #endregion
         public Startup(IConfiguration configuration)
         {
@@ -33,13 +35,16 @@ namespace CrudPerson.WebUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            string errorPath = $"/{Actions.Controller<ErrorController>()}";
+            const string GUID_REGEX_PATTERN = "[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}";
+
             if (env.IsDevelopment())
             {
                 _ = app.UseDeveloperExceptionPage();
             }
             else
             {
-                _ = app.UseExceptionHandler("/Home/Error")
+                _ = app.UseExceptionHandler(errorPath)
                     .UseHsts();// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
 
@@ -51,21 +56,16 @@ namespace CrudPerson.WebUI
             _ = app
                 .UseRequestLocalization(localizationOptions)
                 .UseHttpsRedirection()
+                .UseStatusCodePagesWithReExecute(errorPath, "?statusCode={0}")
                 .UseStaticFiles()
                 .UseRouting()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
                     _ = endpoints.MapControllerRoute(
-                            name: "guidId",
-                            pattern: "{controller=Home}/{action=Index}/{identifier?}",
-                            constraints: new { identifier = "[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}" }); // allow GUID id type
-                })
-                .UseEndpoints(endpoints =>
-                {
-                    _ = endpoints.MapControllerRoute(
                             name: "default",
-                            pattern: "{controller=Home}/{action=Index}/{id?}");
+                            pattern: $"{{controller={Actions.Controller<HomeController>()}}}/{{action={nameof(HomeController.Index)}}}/{{identifier?}}",
+                            constraints: new { identifier = GUID_REGEX_PATTERN }); // allow GUID id type
                 });
         }
     }

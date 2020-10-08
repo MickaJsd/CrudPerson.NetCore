@@ -17,13 +17,8 @@ namespace CrudPerson.WebUI.Controllers
         public IActionResult Index()
         {
             this._logger.LogInformation($"Enter Action {nameof(HomeController)}.{nameof(Index)}");
-            return this.View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            throw new System.Exception("test");
+            //return this.View();
         }
     }
 }

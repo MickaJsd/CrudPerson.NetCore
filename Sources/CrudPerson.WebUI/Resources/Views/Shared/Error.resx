@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GenericRequestErrorMessage" xml:space="preserve">
-    <value>An error occurred while processing your request.</value>
+  <data name="ErrorRequestId" xml:space="preserve">
+    <value>Request ID</value>
   </data>
   <data name="HTML_SwapToDevelopmentForMoreDetails" xml:space="preserve">
     <value>Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred.</value>
@@ -132,8 +132,20 @@
   <data name="PageTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="RequestId" xml:space="preserve">
-    <value>Request ID</value>
+  <data name="PageTitle404" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="PageTitle500" xml:space="preserve">
+    <value>Internal server error</value>
+  </data>
+  <data name="RequestErrorMessage" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="RequestErrorMessage404" xml:space="preserve">
+    <value>The resource you asked was not found.</value>
+  </data>
+  <data name="RequestErrorMessage500" xml:space="preserve">
+    <value>An internal server error occurred while processing your request.</value>
   </data>
   <data name="TitleDevelopmentMode" xml:space="preserve">
     <value>Development Mode</value>

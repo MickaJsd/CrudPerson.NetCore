@@ -1,15 +1,22 @@
 ﻿@model ErrorViewModel
 @{
     ViewData["Title"] = Localizer["PageTitle"];
+
+    string resourceKeySuffix = Model.StatusCodeIsSupported ? Model.StatusCode.ToString() : string.Empty;
 }
 
-<h1 class="text-danger">@Localizer["PageTitle"].</h1>
-<h2 class="text-danger">@Localizer["GenericRequestErrorMessage"]</h2>
+@if (Model.StatusCodeIsSupported)
+{
+    <h1 class="text-danger">@Model.StatusCode.ToString()</h1>
+}
+
+<h1 class="text-danger">@Localizer[$"PageTitle{resourceKeySuffix}"].</h1>
+<h2 class="text-danger">@Localizer[$"RequestErrorMessage{resourceKeySuffix}"]</h2>
 
 @if (Model.ShowRequestId)
 {
     <p>
-        <strong>@Localizer["RequestId"]:</strong> <code>@Model.RequestId</code>
+        <strong>@SharedLocalizer["ErrorRequestId"]:</strong> <code>@Model.RequestId</code>
     </p>
 }
 

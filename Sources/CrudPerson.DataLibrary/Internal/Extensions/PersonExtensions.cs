@@ -10,8 +10,6 @@ namespace CrudPerson.DataLibrary.DataModel
             {
                 return null;
             }
-            //person.Birthdate.kin
-            CultureInfo c = CultureInfo.CurrentUICulture;
             person.Birthdate = person.Birthdate.ToUniversalTime();
             return person;
         }
