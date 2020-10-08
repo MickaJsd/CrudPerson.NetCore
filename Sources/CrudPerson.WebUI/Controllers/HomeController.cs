@@ -1,9 +1,7 @@
 ﻿using CrudPerson.CommonLibrary.Exceptions;
-using CrudPerson.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 
 namespace CrudPerson.WebUI.Controllers
 {
@@ -24,7 +22,7 @@ namespace CrudPerson.WebUI.Controllers
 
         public IActionResult TestError()
         {
-            throw new FailedActionException(nameof(TestError), DateTime.Now.ToLongDateString(), "Nothing to see here");
+            throw new FailedActionException(nameof(TestError), DateTime.Now.ToLongDateString(), Resources.SharedResources.TestErrorMessage);
         }
     }
 }

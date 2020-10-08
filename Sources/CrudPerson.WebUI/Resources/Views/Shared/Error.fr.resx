@@ -146,6 +146,9 @@
   <data name="RequestErrorMessage500" xml:space="preserve">
     <value>Une erreur interne au serveur est sruvenue pendant le traitement de votre requête.</value>
   </data>
+  <data name="TargetedResource" xml:space="preserve">
+    <value>Ressource ciblée</value>
+  </data>
   <data name="TitleDevelopmentMode" xml:space="preserve">
     <value>Mode de développement</value>
   </data>

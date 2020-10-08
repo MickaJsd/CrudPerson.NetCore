@@ -12,6 +12,11 @@
 
 <h1 class="text-danger">@Localizer[$"PageTitle{resourceKeySuffix}"].</h1>
 <h2 class="text-danger">@Localizer[$"RequestErrorMessage{resourceKeySuffix}"]</h2>
+@if (Model.HasOriginalPath)
+{
+    <p>@Localizer["TargetedResource"] : <strong>@Model.GetFormatedOriginalPath()</strong></p>
+
+}
 
 @if (Model.ShowRequestId)
 {

@@ -142,6 +142,24 @@ namespace CrudPerson.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to What an error looks like ?.
+        /// </summary>
+        public static string TestErrorLinkLabel {
+            get {
+                return ResourceManager.GetString("TestErrorLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voilà! This is an error..
+        /// </summary>
+        public static string TestErrorMessage {
+            get {
+                return ResourceManager.GetString("TestErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create, Read, Update and Delete Persons.
         /// </summary>
         public static string TitleAppName {

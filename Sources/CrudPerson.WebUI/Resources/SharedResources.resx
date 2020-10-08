@@ -144,6 +144,12 @@
   <data name="PersonLinkLabel" xml:space="preserve">
     <value>Persons</value>
   </data>
+  <data name="TestErrorLinkLabel" xml:space="preserve">
+    <value>What an error looks like ?</value>
+  </data>
+  <data name="TestErrorMessage" xml:space="preserve">
+    <value>Voilà! This is an error.</value>
+  </data>
   <data name="TitleAppName" xml:space="preserve">
     <value>Create, Read, Update and Delete Persons</value>
   </data>

@@ -24,6 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="@(Actions.Controller<PersonController>())" asp-action="@nameof(PersonController.Index)">@SharedLocalizer["PersonLinkLabel"]</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="@(Actions.Controller<HomeController>())" asp-action="@nameof(HomeController.TestError)">@SharedLocalizer["TestErrorLinkLabel"]</a>
+                        </li>
                     </ul>
                 </div>
             </div>
