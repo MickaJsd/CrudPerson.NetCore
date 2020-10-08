@@ -1,14 +1,21 @@
 ﻿using CrudPerson.DataLibrary.DataModel;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Internal;
+using System;
 using System.Threading.Tasks;
 
 namespace CrudPerson.DataLibrary.Data
 {
-    interface IDatabaseContext
+    interface IDatabaseContext : IDisposable, IAsyncDisposable, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService
     {
         #region Properties
+        DatabaseFacade Database { get; }
+
+        #region DbSets
         DbSet<Person> Person { get; set; }
+        public DbSet<Address> Address { get; set; }
+        #endregion
         #endregion
 
         #region Methods

@@ -16,19 +16,20 @@ namespace CrudPerson.DataLibrary.Internal.Data
 
         #region DbSets
         public DbSet<Person> Person { get; set; }
-        public DbSet<Address> Address { get; set; } 
+        public DbSet<Address> Address { get; set; }
         #endregion
 
         #region IDatabaseContext implementation
+
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();
         }
 
-        public override DbSet<T> Set<T>() where T : class
-        {
-            return base.Set<T>();
-        }
+        //public override DbSet<T> Set<T>() where T : class
+        //{
+        //    return base.Set<T>();
+        //}
         #endregion
 
         #region Model creation

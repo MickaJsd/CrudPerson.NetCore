@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Resources;
 
 [assembly: NeutralResourcesLanguage(CrudPerson.WebUI.Startup.CULTURE_EN)]
@@ -35,11 +36,16 @@ namespace CrudPerson.WebUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if(app == null)
+            {
+                throw new ArgumentNullException(nameof(app));
+            }
+
             string errorPath = $"/{Actions.Controller<ErrorController>()}";
-            const string GUID_REGEX_PATTERN = "[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}";
 
             if (env.IsDevelopment())
             {
+                app.ApplicationServices.ConfigureDataBase(); // database migration in dev mode only
                 _ = app.UseDeveloperExceptionPage();
             }
             else
@@ -52,6 +58,7 @@ namespace CrudPerson.WebUI
                 .SetDefaultCulture(_supportedCultures[0])
                 .AddSupportedCultures(_supportedCultures)
                 .AddSupportedUICultures(_supportedCultures);
+            const string GUID_REGEX_PATTERN = "[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}";
 
             _ = app
                 .UseRequestLocalization(localizationOptions)

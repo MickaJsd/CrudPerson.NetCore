@@ -1,6 +1,8 @@
-﻿using CrudPerson.WebUI.Models;
+﻿using CrudPerson.CommonLibrary.Exceptions;
+using CrudPerson.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 
 namespace CrudPerson.WebUI.Controllers
@@ -17,8 +19,12 @@ namespace CrudPerson.WebUI.Controllers
         public IActionResult Index()
         {
             this._logger.LogInformation($"Enter Action {nameof(HomeController)}.{nameof(Index)}");
-            throw new System.Exception("test");
-            //return this.View();
+            return this.View();
+        }
+
+        public IActionResult TestError()
+        {
+            throw new FailedActionException(nameof(TestError), DateTime.Now.ToLongDateString(), "Nothing to see here");
         }
     }
 }
