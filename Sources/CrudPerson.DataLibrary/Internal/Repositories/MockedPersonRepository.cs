@@ -129,7 +129,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<Person>> ListAllMinimalAsync()
+        public Task<IEnumerable<Person>> ListAllPersonBasicAsync()
         {
             return Task.FromResult((IEnumerable<Person>)this._mockedUpDataPerson.Values);
         }

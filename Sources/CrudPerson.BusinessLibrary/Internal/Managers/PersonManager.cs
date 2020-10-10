@@ -85,9 +85,9 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<BusinessPerson>> ListAllMinimalAsync()
+        public async Task<IEnumerable<BusinessPerson>> ListAllPersonBasicAsync()
         {
-            IEnumerable<DataPerson> allPersons = await this._personRepository.ListAllMinimalAsync().ConfigureAwait(false);
+            IEnumerable<DataPerson> allPersons = await this._personRepository.ListAllPersonBasicAsync().ConfigureAwait(false);
 
             return allPersons.Select(p => p.ToBusiness(this._mapper));
         }

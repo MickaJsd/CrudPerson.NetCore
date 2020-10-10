@@ -83,7 +83,7 @@ namespace CrudPerson.DataLibrary.Internal.Repositories
             return person;
         }
 
-        public async Task<IEnumerable<Person>> ListAllMinimalAsync()
+        public async Task<IEnumerable<Person>> ListAllPersonBasicAsync()
         {
             return await this._personMinimal.ToListAsync()
                        .ConfigureAwait(false);

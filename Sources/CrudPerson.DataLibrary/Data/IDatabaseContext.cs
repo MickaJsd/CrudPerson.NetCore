@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrudPerson.DataLibrary.Data
 {
-    interface IDatabaseContext : IDisposable, IAsyncDisposable, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService
+    public interface IDatabaseContext : IDisposable, IAsyncDisposable, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService
     {
         #region Properties
         DatabaseFacade Database { get; }

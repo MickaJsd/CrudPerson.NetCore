@@ -11,27 +11,29 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class MvcServiceCollectionExtensions
     {
         #region Private constants
-        const string CONFIGURATION_NULL_EXCEPTION = "Configuration is required to add all the services";
-        const string CONFIGURATION_UNKOWN_DATABASE_TYPE_EXCEPTION = "The configured database type is unknown.";
-        const string CONFIGURATION_MISSING_DATABASE_TYPE_EXCEPTION = "The database type is missing or empty in configuration";
-        const string CONFIGURATION_MISSING_CONNECTION_STRING_EXCEPTION = "The database connectionstring is missing or empty in configuration";
-        const string CONNECTION_STRING_NAME = "CrudPerson";
-        const string DATABASE_TYPE_PARAMETER_NAME = "dbtype";
-        const string DATABASE_TYPE_SQLSERVER = "sqlserver";
-        const string DATABASE_TYPE_POSTGRES = "postgres";
+        private const string CONFIGURATION_NULL_EXCEPTION = "Configuration is required to add all the services";
+        private const string CONFIGURATION_UNKOWN_DATABASE_TYPE_EXCEPTION = "The configured database type is unknown.";
+        private const string CONFIGURATION_MISSING_DATABASE_TYPE_EXCEPTION = "The database type is missing or empty in configuration";
+        private const string CONFIGURATION_MISSING_CONNECTION_STRING_EXCEPTION = "The database connectionstring is missing or empty in configuration";
+        private const string CONNECTION_STRING_NAME = "CrudPerson";
+        private const string DATABASE_TYPE_PARAMETER_NAME = "dbtype";
         #endregion
 
         #region Private methods
         private static DbContextOptionsBuilder UseDatabase(this DbContextOptionsBuilder options, string dbType, string connectionstring)
         {
-            switch (dbType)
+            if (Enum.TryParse(dbType, out SupportedDatabaseType enumDbtype))
             {
-                case DATABASE_TYPE_SQLSERVER:
-                    return options.UseSqlServer(connectionstring);
-                case DATABASE_TYPE_POSTGRES:
-                    return options.UseNpgsql(connectionstring);
-                default:
-                    break;
+                switch (enumDbtype)
+                {
+                    case SupportedDatabaseType.sqlserver:
+                        return options.UseSqlServer(connectionstring);
+                    case SupportedDatabaseType.postgres:
+                        return options.UseNpgsql(connectionstring);
+                    case SupportedDatabaseType.unknown:
+                    default:
+                        break;
+                }
             }
             throw new ArgumentException($"{CONFIGURATION_UNKOWN_DATABASE_TYPE_EXCEPTION} : '{dbType}'");
         }
@@ -55,6 +57,15 @@ namespace Microsoft.Extensions.DependencyInjection
 
         #endregion
 
+        #region Public enums
+        public enum SupportedDatabaseType
+        {
+            unknown,
+            sqlserver,
+            postgres
+        } 
+        #endregion
+
         #region Public Methods
         /// <summary>
         /// Add the <see cref="CrudPerson.DataLibrary"/> services to the specified <see cref="IServiceCollection"/> with a <see cref="ServiceLifetime.Scoped"/> lifetime.
@@ -71,7 +82,6 @@ namespace Microsoft.Extensions.DependencyInjection
             return services.AddScoped<IPersonRepository, PersonRepository>()
                            .AddScoped<IDatabaseContext, DatabaseContext>()
                            .AddDbContext(configuration);
-
         }
 
         /// <summary>
@@ -79,9 +89,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the <see cref="IPersonRepository"/> service to.</param>
         /// <returns>The same <see cref="IServiceCollection"/> so that multiple calls can be chained</returns>
-        public static IServiceCollection AddMockedRepositoryServices(this IServiceCollection services)
+        public static IServiceCollection AddMockedRepositoryServices(this IServiceCollection services, ServiceLifetime repositoryServiceLifetime)
         {
-            return services.AddSingleton<IPersonRepository, MockedPersonRepository>();
+            return services.AddService<IPersonRepository, MockedPersonRepository>(repositoryServiceLifetime);
         }
         #endregion
     }

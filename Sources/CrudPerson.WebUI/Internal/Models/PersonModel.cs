@@ -52,7 +52,7 @@ namespace CrudPerson.WebUI.Internal.Models
         #region IPersonModel implementation
         public async Task<IEnumerable<PersonViewModel>> ListAllMinimalAsync()
         {
-            IEnumerable<BusinessPerson> allBusinessPerson = await this._personManager.ListAllMinimalAsync()
+            IEnumerable<BusinessPerson> allBusinessPerson = await this._personManager.ListAllPersonBasicAsync()
                                                                 .ConfigureAwait(false);
             return allBusinessPerson?.Select(p => this._mapper.Map<PersonViewModel>(p));
         }

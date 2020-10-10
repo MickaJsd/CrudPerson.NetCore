@@ -11,7 +11,7 @@ namespace CrudPerson.DataLibrary.Repositories
         /// Lists all the existing persons
         /// </summary>
         /// <returns>The <see cref="IEnumerable<Person>"/> that represents all the existing persons</returns>
-        Task<IEnumerable<Person>> ListAllMinimalAsync();
+        Task<IEnumerable<Person>> ListAllPersonBasicAsync();
 
         /// <summary>
         /// Gets the <see cref="Person"/> by its identifier

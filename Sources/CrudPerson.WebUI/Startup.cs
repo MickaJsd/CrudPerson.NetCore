@@ -14,7 +14,7 @@ namespace CrudPerson.WebUI
     public class Startup
     {
         #region private properties
-        const string CULTURE_FR = "fr";
+        private const string CULTURE_FR = "fr";
         internal const string CULTURE_EN = "en";
         private static readonly string[] _supportedCultures = new string[] { CULTURE_EN, CULTURE_FR };
         #endregion

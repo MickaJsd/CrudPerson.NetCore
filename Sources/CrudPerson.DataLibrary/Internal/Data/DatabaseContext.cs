@@ -25,11 +25,6 @@ namespace CrudPerson.DataLibrary.Internal.Data
         {
             return base.SaveChangesAsync();
         }
-
-        //public override DbSet<T> Set<T>() where T : class
-        //{
-        //    return base.Set<T>();
-        //}
         #endregion
 
         #region Model creation
