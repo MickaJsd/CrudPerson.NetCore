@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using BusinessPerson = CrudPerson.BusinessLibrary.BusinessModel.Person;
 using BusinessAddress = CrudPerson.BusinessLibrary.BusinessModel.Address;
-using DataPerson = CrudPerson.DataLibrary.DataModel.Person;
+using BusinessPerson = CrudPerson.BusinessLibrary.BusinessModel.Person;
 using DataAddress = CrudPerson.DataLibrary.DataModel.Address;
+using DataPerson = CrudPerson.DataLibrary.DataModel.Person;
 
 namespace CrudPerson.BusinessLibrary.Internal.Configuration
 {

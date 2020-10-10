@@ -2,21 +2,21 @@ using CrudPerson.BusinessLibrary.Managers;
 using CrudPerson.DataLibrary.Repositories;
 using CrudPerson.Tests.Internal.Mocks;
 using CrudPerson.WebUI;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Extensions.Configuration;
 
 namespace CrudPerson.Tests.WebUI
 {
     [TestClass]
-    public class ServiceResolutionTest
+    public class ServiceResolutionTest : TestsBase
     {
         #region private Methods
 
-        private void GenericServiceResolutionTest<TService>()
+        private static void GenericServiceResolutionTest<TService>()
         {
             // arrange
-            IConfiguration mockedConfiguration = Configuration.GetMock();
+            IConfiguration mockedConfiguration = MockConfiguration.GetMock();
             Startup pluggedStartup = new Startup(mockedConfiguration);
             IServiceCollection serviceCollection = new ServiceCollection();
 
@@ -36,13 +36,13 @@ namespace CrudPerson.Tests.WebUI
         [TestMethod]
         public void PersonManagerServiceResolutionTest()
         {
-            this.GenericServiceResolutionTest<IPersonManager>();
+            GenericServiceResolutionTest<IPersonManager>();
         }
 
         [TestMethod]
         public void PersonRepositoryServiceResolutionTest()
         {
-            this.GenericServiceResolutionTest<IPersonRepository>();
+            GenericServiceResolutionTest<IPersonRepository>();
         }
         #endregion
     }

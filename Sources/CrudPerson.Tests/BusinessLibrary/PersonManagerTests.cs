@@ -1,7 +1,5 @@
 using CrudPerson.BusinessLibrary.BusinessModel;
 using CrudPerson.BusinessLibrary.Managers;
-using CrudPerson.Tests.Internal.Mocks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -13,7 +11,7 @@ namespace CrudPerson.Tests.BusinessLibrary
 {
     [TestClass]
     public class PersonManagerTests : TestsBase
-    {      
+    {
         [TestMethod]
         public async Task CreateReadUpdateDeleteTest()
         {
@@ -40,7 +38,7 @@ namespace CrudPerson.Tests.BusinessLibrary
             };
 
             // act
-            Person createdPerson = await service.CreateAsync(newPerson);
+            Person createdPerson = await service.CreateAsync(newPerson).ConfigureAwait(false);
 
             // assert
             Assert.IsNotNull(createdPerson);
@@ -51,7 +49,7 @@ namespace CrudPerson.Tests.BusinessLibrary
             Guid createdIdentifier = createdPerson.Identifier;
 
             // act
-            Person readPerson = await service.ReadAsync(createdIdentifier);
+            Person readPerson = await service.ReadAsync(createdIdentifier).ConfigureAwait(false);
 
             // assert
             Assert.IsNotNull(readPerson);
@@ -59,26 +57,29 @@ namespace CrudPerson.Tests.BusinessLibrary
             // - update
             // arrange
             const string NEW_FIRST_NAME = "Bon";
+            const string NEW_ADDITIONAL_ADDRESS = "Second floor";
             readPerson.Firstname = NEW_FIRST_NAME;
+            readPerson.Address.AdditionalAddress = NEW_ADDITIONAL_ADDRESS;
 
             // act
-            Person updatedPerson = await service.UpdateAsync(readPerson);
+            Person updatedPerson = await service.UpdateAsync(readPerson).ConfigureAwait(false);
 
             // assert
             Assert.IsNotNull(updatedPerson);
             Assert.AreEqual(updatedPerson.Firstname, NEW_FIRST_NAME);
+            Assert.AreEqual(updatedPerson.Address.AdditionalAddress, NEW_ADDITIONAL_ADDRESS);
             Assert.AreEqual(updatedPerson.Identifier, createdIdentifier);
 
             // - delete
             // act
-            Person deletedPerson = await service.DeteleAsync(readPerson.Identifier);
+            Person deletedPerson = await service.DeteleAsync(readPerson.Identifier).ConfigureAwait(false);
 
             // assert
             Assert.IsNotNull(deletedPerson);
 
             // - List all
             // act
-            IEnumerable<Person> persons = await service.ListAllPersonBasicAsync();
+            IEnumerable<Person> persons = await service.ListAllPersonBasicAsync().ConfigureAwait(false);
 
             // assert
             Assert.IsNotNull(persons);

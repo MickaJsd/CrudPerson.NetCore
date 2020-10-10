@@ -11,7 +11,7 @@ namespace CrudPerson.WebUI.Models
         /// Lists all the existing persons
         /// </summary>
         /// <returns>The <see cref="IEnumerable<PersonViewModel>"/> that represents all the existing persons with fewest informations</returns>
-        Task<IEnumerable<PersonViewModel>> ListAllMinimalAsync();
+        Task<IEnumerable<PersonViewModel>> ListAllPersonBasicAsync();
 
         /// <summary>
         /// Gets the <see cref="PersonViewModel"/> by its identifier

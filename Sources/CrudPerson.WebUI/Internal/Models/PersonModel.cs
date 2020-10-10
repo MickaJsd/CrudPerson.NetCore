@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BusinessPerson = CrudPerson.BusinessLibrary.BusinessModel.Person;
 using CrudPerson.BusinessLibrary.Managers;
 using CrudPerson.WebUI.Models;
 using CrudPerson.WebUI.Models.ViewModels;
@@ -7,17 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessPerson = CrudPerson.BusinessLibrary.BusinessModel.Person;
 
 namespace CrudPerson.WebUI.Internal.Models
 {
+    /// <summary>
+    /// Central access point to the <see cref="IPersonManager"/> :
+    ///  - calls the manager;
+    ///  - transform the received business object to viewModels
+    /// </summary>
     internal class PersonModel : IPersonModel
     {
-        /************
-         * Dans cette classe je n'étais pas sûr pour les guards clauses : 
-         * en principe je sais qu'elle est appelée par un controller en interne à ce projet
-         * mais dans l'idée, si le projet avait été amené à évoluer, cette classe pourrait 
-         * servir à d'autres controllers qui pourraient ne pas faire ces vérifications.
-         *************/
+        /************ NB ************
+         * Dans cette classe j'ai hésité à conserver les guards clauses.
+         * En principe je sais qu'elle est appelée par un controller de manière interne à ce projet
+         * mais si le projet est amené à évoluer, cette classe pourrait servir à d'autres controllers 
+         * qui riqueraient de  ne pas faire ces vérifications. Ainsi les guard clauses sont duppliquées.
+         ****************************/
 
         #region Private properties
         private IPersonManager _personManager { get; }
@@ -39,46 +44,50 @@ namespace CrudPerson.WebUI.Internal.Models
             {
                 return null;
             }
-            BusinessPerson personToEdit = this._mapper.Map<BusinessPerson>(personModel);
+            BusinessPerson personToEdit = personModel.ToBusiness(this._mapper);
 
-            BusinessPerson editedPerson = await editionFunctionAsync(personToEdit)
-                                           .ConfigureAwait(false);
+            BusinessPerson editedBusinessPerson = await editionFunctionAsync(personToEdit).ConfigureAwait(false);
 
-            return this._mapper.Map<PersonViewModel>(editedPerson);
+            PersonViewModel editedPersonModel = editedBusinessPerson.ToviewModel(this._mapper);
+            return editedPersonModel;
 
         }
         #endregion
 
         #region IPersonModel implementation
-        public async Task<IEnumerable<PersonViewModel>> ListAllMinimalAsync()
+        /// <inheritdoc/>
+        public async Task<IEnumerable<PersonViewModel>> ListAllPersonBasicAsync()
         {
-            IEnumerable<BusinessPerson> allBusinessPerson = await this._personManager.ListAllPersonBasicAsync()
-                                                                .ConfigureAwait(false);
-            return allBusinessPerson?.Select(p => this._mapper.Map<PersonViewModel>(p));
+            IEnumerable<BusinessPerson> allBusinessPerson = await this._personManager.ListAllPersonBasicAsync().ConfigureAwait(false);
+            IEnumerable<PersonViewModel> persons = allBusinessPerson?.Select(p => p.ToviewModel(this._mapper));
+            return persons;
         }
 
+        /// <inheritdoc/>
         public async Task<PersonViewModel> ReadAsync(Guid identifier)
         {
             if (identifier == Guid.Empty)
             {
                 return null;
             }
-            BusinessPerson foundPerson = await this._personManager.ReadAsync(identifier)
-                                            .ConfigureAwait(false);
+            BusinessPerson foundPerson = await this._personManager.ReadAsync(identifier).ConfigureAwait(false);
 
-            return this._mapper.Map<PersonViewModel>(foundPerson);
+            return foundPerson.ToviewModel(this._mapper);
         }
 
+        /// <inheritdoc/>
         public Task<PersonViewModel> UpdateAsync(PersonViewModel personModel)
         {
             return this.EditPersonWithGuardsAsync(personModel, this._personManager.UpdateAsync);
         }
 
+        /// <inheritdoc/>
         public Task<PersonViewModel> CreateAsync(PersonViewModel personModel)
         {
             return this.EditPersonWithGuardsAsync(personModel, this._personManager.CreateAsync);
         }
 
+        /// <inheritdoc/>
         public async Task<PersonViewModel> DeteleAsync(Guid identifier)
         {
             if (identifier == Guid.Empty)
@@ -86,11 +95,11 @@ namespace CrudPerson.WebUI.Internal.Models
                 return null;
             }
 
-            BusinessPerson deletedPerson = await this._personManager.DeteleAsync(identifier)
-                                               .ConfigureAwait(false);
+            BusinessPerson deletedBusinessPerson = await this._personManager.DeteleAsync(identifier).ConfigureAwait(false);
 
-            return this._mapper.Map<PersonViewModel>(deletedPerson);
-        } 
+            PersonViewModel deletedPersonModel = deletedBusinessPerson.ToviewModel(this._mapper);
+            return deletedPersonModel;
+        }
         #endregion
     }
 }

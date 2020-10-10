@@ -3,10 +3,15 @@ using Moq;
 
 namespace CrudPerson.Tests.Internal.Mocks
 {
-    public static class Configuration
+    public static class MockConfiguration
     {
+        /// <summary>
+        /// Gets a mocked configuration to access the test database
+        /// </summary>
+        /// <returns></returns>
         public static IConfiguration GetMock()
         {
+            // TODO : mettre données de configuration dans un fichier de configuration spécifique au projet de test
             const string TEST_CONNECTIONSTRING = "User ID=postgres;Password=p@ssw0rd;Host=localhost;Port=5432;Database=CrudPersonTest;";
             const string TEST_DBTYPE = "postgres";
 

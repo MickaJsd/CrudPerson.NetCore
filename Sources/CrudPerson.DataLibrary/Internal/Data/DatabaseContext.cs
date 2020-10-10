@@ -11,7 +11,7 @@ namespace CrudPerson.DataLibrary.Internal.Data
         #region Constructor
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-        } 
+        }
         #endregion
 
         #region DbSets
@@ -43,10 +43,10 @@ namespace CrudPerson.DataLibrary.Internal.Data
                         .HasOne(person => person.Address).WithOne()
                         .HasForeignKey<Address>(address => address.Identifier);
                 });
-            this.AddMinimalDataPerson(modelBuilder);
+            AddMinimalDataPerson(modelBuilder);
         }
 
-        private void AddMinimalDataPerson(ModelBuilder modelBuilder)
+        private static void AddMinimalDataPerson(ModelBuilder modelBuilder)
         {
             _ = modelBuilder.Entity<Person>().HasData(
                 new Person {
@@ -113,7 +113,7 @@ namespace CrudPerson.DataLibrary.Internal.Data
 
                 });
 
-        } 
+        }
         #endregion
     }
 }

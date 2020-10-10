@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrudPerson.BusinessLibrary.Internal.Managers
 {
+    [Obsolete("Do not use - Used at dev time to mock the Business layer")]
     internal class MockedPersonManager : IPersonManager
     {
         #region Constructor

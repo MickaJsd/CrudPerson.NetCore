@@ -14,7 +14,7 @@ namespace CrudPerson.DataLibrary.Data
 
         #region DbSets
         DbSet<Person> Person { get; set; }
-        public DbSet<Address> Address { get; set; }
+        DbSet<Address> Address { get; set; }
         #endregion
         #endregion
 

@@ -30,8 +30,7 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            PersonViewModel person = await this._personModel.ReadAsync(identifier.Value)
-                                               .ConfigureAwait(false);
+            PersonViewModel person = await this._personModel.ReadAsync(identifier.Value).ConfigureAwait(false);
             if (person == null)
             {
                 return this.NotFound();
@@ -60,15 +59,13 @@ namespace CrudPerson.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return this.View(await this._personModel.ListAllMinimalAsync()
-                        .ConfigureAwait(false));
+            return this.View(await this._personModel.ListAllPersonBasicAsync().ConfigureAwait(false));
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(Guid? identifier)
         {
-            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Details), identifier)
-                        .ConfigureAwait(false);
+            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Details), identifier).ConfigureAwait(false);
         }
 
         [HttpGet]
@@ -81,30 +78,26 @@ namespace CrudPerson.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PersonViewModel personViewModel)
         {
-            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.CreateAsync, nameof(Edit))
-                            .ConfigureAwait(false);
+            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.CreateAsync, nameof(Edit)).ConfigureAwait(false);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? identifier)
         {
-            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Edit), identifier)
-                        .ConfigureAwait(false);
+            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Edit), identifier).ConfigureAwait(false);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PersonViewModel personViewModel)
         {
-            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.UpdateAsync, nameof(Edit))
-                            .ConfigureAwait(false);
+            return await this.EditPersonWithGuardsAsync(personViewModel, this._personModel.UpdateAsync, nameof(Edit)).ConfigureAwait(false);
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(Guid? identifier)
         {
-            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Delete), identifier)
-                        .ConfigureAwait(false);
+            return await this.ViewPersonByIdentifierWithGuardsAsync(nameof(Delete), identifier).ConfigureAwait(false);
         }
 
         [HttpPost]
@@ -117,8 +110,8 @@ namespace CrudPerson.WebUI.Controllers
                 return this.NotFound();
             }
 
-            PersonViewModel person = await this._personModel.DeteleAsync(identifier)
-                                               .ConfigureAwait(false);
+            PersonViewModel person = await this._personModel.DeteleAsync(identifier).ConfigureAwait(false);
+
             if (person == null)
             {
                 return this.NotFound();

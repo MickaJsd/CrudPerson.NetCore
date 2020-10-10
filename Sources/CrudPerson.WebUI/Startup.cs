@@ -6,24 +6,32 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Resources;
 
-[assembly: NeutralResourcesLanguage(CrudPerson.WebUI.Startup.CULTURE_EN)]
 namespace CrudPerson.WebUI
 {
     public class Startup
     {
-        #region private properties
-        private const string CULTURE_FR = "fr";
+        #region Internal constants
         internal const string CULTURE_EN = "en";
+        #endregion
+
+        #region private properties and constants
+        private const string CULTURE_FR = "fr";
         private static readonly string[] _supportedCultures = new string[] { CULTURE_EN, CULTURE_FR };
         #endregion
+
+        #region Public properties
+        public IConfiguration Configuration { get; }
+        #endregion
+
+        #region Constructor
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
         }
+        #endregion
 
-        public IConfiguration Configuration { get; }
+        #region Public methods
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,7 +44,7 @@ namespace CrudPerson.WebUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if(app == null)
+            if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
@@ -75,5 +83,6 @@ namespace CrudPerson.WebUI
                             constraints: new { identifier = GUID_REGEX_PATTERN }); // allow GUID id type
                 });
         }
+        #endregion
     }
 }

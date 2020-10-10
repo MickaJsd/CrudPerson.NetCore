@@ -45,11 +45,15 @@ namespace CrudPerson.CommonLibrary.Exceptions
         #region Private Static Methods
         private static string GetMessage(string actionName, string message)
         {
-            return string.Format(ExceptionResources.FailedActionException_FailedActionMessageFormat, actionName, message);
+            // TODO : fournir un IFormatProvider qui s'appuie sur la culture courante pour faire la mise en forme
+            string formatedMessage = string.Format(ExceptionResources.FailedActionException_FailedActionMessageFormat, actionName, message);
+            return formatedMessage;
         }
         private static string GetMessage(string actionName, string contextData, string message)
         {
-            return string.Format(ExceptionResources.FailedActionException_FailedActionWithContentDataMessageFormat, actionName, message, contextData);
+            // TODO : fournir un IFormatProvider qui s'appuie sur la culture courante pour faire la mise en forme
+            string formatedMessage = string.Format(ExceptionResources.FailedActionException_FailedActionWithContentDataMessageFormat, actionName, message, contextData);
+            return formatedMessage;
         }
         #endregion
     }

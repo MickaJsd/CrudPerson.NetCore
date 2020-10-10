@@ -1,15 +1,18 @@
-﻿namespace CrudPerson.WebUI.Models.ViewModels
+﻿using AutoMapper;
+using CrudPerson.BusinessLibrary.BusinessModel;
+
+namespace CrudPerson.WebUI.Models.ViewModels
 {
     internal static class PersonViewModelExtensions
     {
-        public static PersonViewModel ToLocalDates(this PersonViewModel person)
+        public static PersonViewModel ToviewModel(this Person person, IMapper mapper)
         {
-            if (person == null)
-            {
-                return null;
-            }
-            person.Birthdate = person.Birthdate.ToLocalTime();
-            return person;
+            return mapper.Map<PersonViewModel>(person);
+        }
+
+        public static Person ToBusiness(this PersonViewModel person, IMapper mapper)
+        {
+            return mapper.Map<Person>(person);
         }
     }
 }

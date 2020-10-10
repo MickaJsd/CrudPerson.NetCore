@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             unknown,
             sqlserver,
             postgres
-        } 
+        }
         #endregion
 
         #region Public Methods
@@ -89,9 +89,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the <see cref="IPersonRepository"/> service to.</param>
         /// <returns>The same <see cref="IServiceCollection"/> so that multiple calls can be chained</returns>
-        public static IServiceCollection AddMockedRepositoryServices(this IServiceCollection services, ServiceLifetime repositoryServiceLifetime)
+        [Obsolete("Do not use - Used at dev time to mock the Business layer")]
+        public static IServiceCollection AddMockedRepositoryServices(this IServiceCollection services)
         {
-            return services.AddService<IPersonRepository, MockedPersonRepository>(repositoryServiceLifetime);
+            return services.AddService<IPersonRepository, MockedPersonRepository>(ServiceLifetime.Singleton);
         }
         #endregion
     }

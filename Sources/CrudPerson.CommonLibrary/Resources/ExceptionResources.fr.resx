@@ -117,39 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentNullOrEmptyException_RequiredPersonData1" xml:space="preserve">
+  <data name="ArgumentNullOrEmptyException_RequiredPersonData" xml:space="preserve">
     <value>Les données de personne sont requises</value>
   </data>
-  <data name="ArgumentNullOrEmptyException_RequiredPersonIdentifier1" xml:space="preserve">
+  <data name="ArgumentNullOrEmptyException_RequiredPersonIdentifier" xml:space="preserve">
     <value>L'identifiant de personne est requis</value>
   </data>
-  <data name="FailedActionException_AlreadyExistingPerson1" xml:space="preserve">
+  <data name="FailedActionException_AlreadyExistingPerson" xml:space="preserve">
     <value>Une personne existe déjà avec cet identifiant</value>
   </data>
-  <data name="FailedActionException_CreateActionName1" xml:space="preserve">
+  <data name="FailedActionException_CreateActionName" xml:space="preserve">
     <value>Créer</value>
   </data>
-  <data name="FailedActionException_DeleteActionName1" xml:space="preserve">
+  <data name="FailedActionException_DeleteActionName" xml:space="preserve">
     <value>Supprimer</value>
   </data>
-  <data name="FailedActionException_EditActionName1" xml:space="preserve">
+  <data name="FailedActionException_EditActionName" xml:space="preserve">
     <value>Editer</value>
   </data>
-  <data name="FailedActionException_EditPersonExceptionMessage1" xml:space="preserve">
+  <data name="FailedActionException_EditPersonExceptionMessage" xml:space="preserve">
     <value>L'édition de la personne a échoué</value>
   </data>
-  <data name="FailedActionException_FailedActionMessageFormat1" xml:space="preserve">
+  <data name="FailedActionException_FailedActionMessageFormat" xml:space="preserve">
     <value>Action en erreur : {0} - {1}</value>
     <comment>0: action name; 1: exception message</comment>
   </data>
-  <data name="FailedActionException_FailedActionWithContentDataMessageFormat1" xml:space="preserve">
+  <data name="FailedActionException_FailedActionWithContentDataMessageFormat" xml:space="preserve">
     <value>Action en erreur : {0} - {1} - Données de context : {2}</value>
     <comment>0: action name; 1: exception message; 2: content data</comment>
   </data>
-  <data name="FailedActionException_SavingError1" xml:space="preserve">
+  <data name="FailedActionException_SavingError" xml:space="preserve">
     <value>Une erreur s'est produit pendant la sauvegarde</value>
   </data>
-  <data name="FailedActionException_UnexistingPerson1" xml:space="preserve">
+  <data name="FailedActionException_UnexistingPerson" xml:space="preserve">
     <value>Aucune personne n'existe avec cet identifiant</value>
   </data>
 </root>

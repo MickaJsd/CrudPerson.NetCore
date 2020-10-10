@@ -18,7 +18,7 @@ namespace CrudPerson.WebUI.Models
         public string OriginalPath { get; set; }
         public string OriginalQueryString { get; set; }
 
-        public bool HasOriginalPath  => !string.IsNullOrWhiteSpace(this.OriginalPath);
+        public bool HasOriginalPath => !string.IsNullOrWhiteSpace(this.OriginalPath);
 
         public string GetFormatedOriginalPath()
         {

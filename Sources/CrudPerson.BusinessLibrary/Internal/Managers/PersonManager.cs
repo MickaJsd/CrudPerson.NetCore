@@ -54,8 +54,7 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
 
             DataPerson newPerson = person.ToData(this._mapper);
             newPerson.Identifier = Guid.NewGuid();
-            DataPerson editedDataPerson = await this._personRepository.CreateAsync(newPerson)
-                                            .ConfigureAwait(false);
+            DataPerson editedDataPerson = await this._personRepository.CreateAsync(newPerson).ConfigureAwait(false);
 
             if (editedDataPerson == null)
             {
@@ -89,7 +88,9 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
         {
             IEnumerable<DataPerson> allPersons = await this._personRepository.ListAllPersonBasicAsync().ConfigureAwait(false);
 
-            return allPersons.Select(p => p.ToBusiness(this._mapper));
+            IEnumerable<BusinessPerson> persons = allPersons.Select(p => p.ToBusiness(this._mapper));
+
+            return persons;
         }
 
         /// <inheritdoc/>
@@ -126,7 +127,9 @@ namespace CrudPerson.BusinessLibrary.Internal.Managers
                 throw new FailedActionException(ExceptionResources.FailedActionException_EditActionName, ExceptionResources.FailedActionException_EditPersonExceptionMessage);
             }
 
-            return updatedDataPerson.ToBusiness(this._mapper);
+            BusinessPerson updatedPerson = updatedDataPerson.ToBusiness(this._mapper);
+
+            return updatedPerson;
         }
         #endregion
     }

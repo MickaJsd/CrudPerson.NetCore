@@ -11,8 +11,8 @@ namespace CrudPerson.WebUI.Controllers
         public IActionResult Index(int? statusCode = null)
         {
             IStatusCodeReExecuteFeature reExecuteFeature = this.HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-            ErrorViewModel errorModel = new ErrorViewModel { 
-                RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier ,
+            ErrorViewModel errorModel = new ErrorViewModel {
+                RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier,
                 StatusCode = statusCode,
                 OriginalPath = reExecuteFeature?.OriginalPath,
                 OriginalQueryString = reExecuteFeature?.OriginalQueryString

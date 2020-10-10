@@ -5,6 +5,11 @@ namespace CrudPerson.WebUI.Tools
 {
     public static class Actions
     {
+        /// <summary>
+        /// Gets the name of the specified controller, ready to use in a URL building process
+        /// </summary>
+        /// <typeparam name="TController">Type of the target controller</typeparam>
+        /// <returns>The name of the coutroller minus the term "controller"</returns>
         public static string Controller<TController>()
             where TController : Controller
         {

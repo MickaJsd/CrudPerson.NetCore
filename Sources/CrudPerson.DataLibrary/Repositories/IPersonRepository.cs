@@ -8,9 +8,9 @@ namespace CrudPerson.DataLibrary.Repositories
     public interface IPersonRepository
     {
         /// <summary>
-        /// Lists all the existing persons
+        /// Lists all the existing persons with only the basic informations
         /// </summary>
-        /// <returns>The <see cref="IEnumerable<Person>"/> that represents all the existing persons</returns>
+        /// <returns>The <see cref="IEnumerable<Person>"/> that represents all the existing persons with basic informations</returns>
         Task<IEnumerable<Person>> ListAllPersonBasicAsync();
 
         /// <summary>
@@ -23,16 +23,16 @@ namespace CrudPerson.DataLibrary.Repositories
         /// <summary>
         /// Updates the specified <see cref="Person"/> if it exists
         /// </summary>
-        /// <param name="personViewModel">The <see cref="Person"/> to update</param>
+        /// <param name="person">The <see cref="Person"/> to update</param>
         /// <returns>If the <see cref="Person"/> exists, the updated <see cref="Person"/>; else <see cref="null"/></returns>
-        Task<Person> UpdateAsync(Person personEntity);
+        Task<Person> UpdateAsync(Person person);
 
         /// <summary>
         /// Creates the specified <see cref="Person"/>
         /// </summary>
-        /// <param name="personViewModel">The <see cref="Person"/> to create</param>
+        /// <param name="person">The <see cref="Person"/> to create</param>
         /// <returns>The created <see cref="Person"/></returns>
-        Task<Person> CreateAsync(Person personEntity);
+        Task<Person> CreateAsync(Person person);
 
         /// <summary>
         /// Deletes the specified <see cref="Person"/> if it exists

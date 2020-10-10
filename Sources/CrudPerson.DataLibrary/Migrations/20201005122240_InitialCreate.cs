@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace CrudPerson.DataLibrary.Migrations
 {
@@ -9,8 +9,7 @@ namespace CrudPerson.DataLibrary.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "Person",
-                columns: table => new
-                {
+                columns: table => new {
                     Identifier = table.Column<Guid>(nullable: false),
                     ZipCode = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
@@ -28,10 +27,7 @@ namespace CrudPerson.DataLibrary.Migrations
                 });
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
+        protected override void Down(MigrationBuilder migrationBuilder) => migrationBuilder.DropTable(
                 name: "Person");
-        }
     }
 }

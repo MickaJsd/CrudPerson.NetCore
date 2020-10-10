@@ -2,6 +2,7 @@
 using CrudPerson.BusinessLibrary.Internal.Configuration;
 using CrudPerson.BusinessLibrary.Internal.Managers;
 using CrudPerson.BusinessLibrary.Managers;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -31,10 +32,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Add the mocked <see cref="IPersonManager"/> service to the specified <see cref="IServiceCollection"/> with a <see cref="ServiceLifetime.Singleton"/> lifetime.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add the <see cref="IPersonManager"/> service to.</param>
+        /// <param name="businessServiceLifetime"></param>
         /// <returns>The same <see cref="IServiceCollection"/> so that multiple calls can be chained</returns>
-        public static IServiceCollection AddMockedBusinessServices(this IServiceCollection services, ServiceLifetime businessServiceLifetime)
+        [Obsolete("Do not use - Used at dev time to mock the Business layer")]
+        public static IServiceCollection AddMockedBusinessServices(this IServiceCollection services)
         {
-            return services.InnerAddBusinessServices<MockedPersonManager>(businessServiceLifetime);
+            return services.InnerAddBusinessServices<MockedPersonManager>(ServiceLifetime.Singleton);
         }
         #endregion
     }

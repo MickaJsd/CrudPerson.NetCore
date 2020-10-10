@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrudPerson.DataLibrary.Internal.Repositories
 {
+    [Obsolete("Do not use - Used at dev time to mock the Business layer")]
     internal class MockedPersonRepository : IPersonRepository
     {
         #region Constructor
